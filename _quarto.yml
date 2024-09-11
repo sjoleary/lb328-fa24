@@ -44,6 +44,10 @@ format:
     embed-resources: true
   pdf:
     documentclass: scrreprt
+    
+execute: 
+  warning: false
+  error: false
 
 reference-location: margin
 citation-location: margin

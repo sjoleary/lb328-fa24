@@ -1,6 +1,16 @@
 
 # Characterizing the hydrological regime of the Piscataquog river & headwater streams
 
+```{r}
+#| label: set-up
+#| include: false
+
+# set options
+knitr::opts_chunk$set(tidy = FALSE)
+options(htmltools.dir.version = FALSE)
+
+```
+
 ## Water stage and water flow
 
 Time series of water stage and water flow are two measurements of water that can be used to describe the hydrological regime in a river or stream.
@@ -264,7 +274,8 @@ precip <- read_delim("data/man_precipitation.csv",
   clean_names()
 
 # check data
-head(precip)
+head(precip) %>%
+  kable()
 
 ```
 
@@ -274,6 +285,7 @@ Now let's plot this data set as a bar graph:
 
 ggplot(precip, aes(x = date, y = prcp)) +
   geom_bar(stat = "identity", color = "darkblue") +
+  labs(x = "date", y = "daily total precipitation") +
   theme_classic()
 
 ```
@@ -290,9 +302,10 @@ p1 <- ggplot(precip, aes(x = date, y = prcp)) +
 p2 <- ggplot(discharge, aes(x = date, y = discharge_cfs)) +
   geom_line() +
   geom_point() +
-  labs(x = "Date", y = "Daily Mean Discarge [cf]") +
+  labs(x = "Date", y = "daily mean discarge [cfs]") +
   theme_classic()
 
+# combine figures under each other
 p1 / p2
 
 ```
@@ -332,16 +345,18 @@ Describe additional measurements you would need to make this information more us
 
 :::
 
-Let's take a look at the data from Rand Brook. In addition to reading in the data, we will split the time stamp into date and time, to calculate mean daily water level. Then we will extract the year into a separate column as well as determine the Julian Day^[]
+### Rand Brook
+
+Let's take a look at the data from Rand Brook. In addition to reading in the data, we will split the time stamp into date and time, to calculate mean daily water level. Then we will extract the year into a separate column as well as determine the day of the year.
 
 ```{r}
 
-rab <- read_delim("data/RAB_water-level.tsv", delim = "\t") %>%
-  mutate(date = as_date(date_time)) %>%
-  group_by(date) %>%
-  summarize(mean_daily_level_cm = mean(water_level_cm)) %>%
-  mutate(yday = yday(date),
-         year = as.character(year(date)))
+rab <- read_delim("data/RAB_water-level.tsv", delim = "\t") %>% # read data set
+  mutate(date = as_date(date_time)) %>%                         # extract date
+  group_by(date) %>%                                            # group by date
+  summarize(mean_daily_level_cm = mean(water_level_cm)) %>%     # calculate daily mean
+  mutate(yday = yday(date),                                     # determine day of year
+         year = as.character(year(date)))                       # make year qualitative
 
 ```
 
@@ -352,6 +367,8 @@ Now we can plot the change in water level over the course of a year.
 ggplot(rab, aes(x = yday, y = mean_daily_level_cm, color = year)) +
   geom_line() +
   geom_point(size = 0.5) +
+  scale_color_manual(values = c("#3E2F5B", "#136F63", "#E0CA3C", "#F34213")) +
+  labs(x = "day of the year", y = "daily mean water level [cm]") +
   theme_classic() + 
   theme(legend.position = "bottom")
 
@@ -362,9 +379,10 @@ That's a bit tricky to see so we can also split each year into a separate panel:
 ```{r}
 
 ggplot(rab, aes(x = yday, y = mean_daily_level_cm)) +
-  geom_line() +
-  geom_point(size = 0.5) +
+  geom_line(color = "#136F63") +
+  geom_point(size = 0.5, color = "#136F63") +
   facet_grid(. ~ year) +
+  labs(x = "date", y = "daily mean water level [cm]") +
   theme_classic() + 
   theme(legend.position = "bottom")
 
@@ -375,16 +393,26 @@ Or we could just plot it by date:
 ```{r}
 
 ggplot(rab, aes(x = date, y = mean_daily_level_cm)) +
-  geom_line() +
-  geom_point(size = 0.5) +
+  geom_line(color = "#136F63") +
+  geom_point(size = 0.5, color = "#136F63") + 
+  labs(x = "date", y = "daily mean water level [cm]") +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+
+rab_plot <- ggplot(rab, aes(x = date, y = mean_daily_level_cm)) +
+  geom_line(color = "#136F63") +
+  geom_point(size = 0.5, color = "#136F63") + 
+  labs(Title = "Rand Brook",
+       x = "date", y = "daily mean water level [cm]") +
   theme_classic() + 
   theme(legend.position = "bottom")
 
 ```
 
+
+### Compare to Precipitation Data
+
 Let's compare our data sets to the precipitation over that time. Don't worry, I have already downloaded the data through the NOAA climate page, it is waiting for you in the google folder.
-
-
 
 ```{r}
 
@@ -398,7 +426,13 @@ Let's take a look:
 ```{r}
 
 ggplot(precip_2021, aes(x = date, y = prcp)) +
-  geom_bar(stat = "identity", color = "darkblue") +
+  geom_bar(stat = "identity", color = "#3E2F5B", fill = "#3E2F5B") +
+  labs(x = "date", y = "mean daily precipitation") +
+  theme_classic()
+
+prec_plot <- ggplot(precip_2021, aes(x = date, y = prcp)) +
+  geom_bar(stat = "identity", color = "#3E2F5B", fill = "#3E2F5B") +
+  labs(x = "date", y = "mean daily precipitation") +
   theme_classic()
 
 ```
@@ -407,7 +441,7 @@ ggplot(precip_2021, aes(x = date, y = prcp)) +
 
 Use your new found skills to read in data and plot it to repeat the same process we just completed for Rand Brook for the remaining locations.
 
-You should also find a daily discharge file for the same time period for the Piscataquog in our google folder.
+You should also find a daily discharge file for the same time period for the Piscataquog in our Google folder.
 
 Create a plot that contains the precipitation data as well as the water level data for each headwater stream location. You will notice that there are some gaps in the data because ... well, that's just how science goes sometimes. We tried.
 
@@ -419,7 +453,110 @@ Summarize your results and insights - hang onto these, you will likely want to r
 
 ::: {.callout-note title="Answer" collapse="true"}
 
+**Whiting Brook**
 
+Let's take a look at the data from Whiting Brook.
+
+```{r}
+
+whb <- read_delim("data/WHB_water-level.tsv", delim = "\t") %>% # read data set
+  mutate(date = as_date(date_time)) %>%                         # extract date
+  group_by(date) %>%                                            # group by date
+  summarize(mean_daily_level_cm = mean(water_level_cm)) %>%     # calculate daily mean
+  mutate(yday = yday(date),                                     # determine day of year
+         year = as.character(year(date)))                       # make year qualitative
+
+
+whb_plot <- ggplot(whb, aes(x = date, y = mean_daily_level_cm)) +
+  geom_line(color = "#136F63") +
+  geom_point(size = 0.5, color = "#136F63") + 
+  labs(title = "Whiting Brook",
+       x = "date", y = "daily mean water level [cm]") +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+
+
+```
+
+**Brennan Brook**
+
+Let's take a look at the data from Brennan Brook.
+
+```{r}
+
+brb <- read_delim("data/BRB_water-level.tsv", delim = "\t") %>% # read data set
+  mutate(date = as_date(date_time)) %>%                         # extract date
+  group_by(date) %>%                                            # group by date
+  summarize(mean_daily_level_cm = mean(water_level_cm)) %>%     # calculate daily mean
+  mutate(yday = yday(date),                                     # determine day of year
+         year = as.character(year(date)))                       # make year qualitative
+
+
+brb_plot <- ggplot(brb, aes(x = date, y = mean_daily_level_cm)) +
+  geom_line(color = "#136F63") +
+  geom_point(size = 0.5, color = "#136F63") + 
+  labs(title = "Brennan Brook",
+       x = "date", y = "daily mean water level [cm]") +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+
+```
+
+
+**Schoolhouse Brook**
+
+Let's take a look at the data from Schoolhouse Brook. 
+
+```{r}
+
+sch <- read_delim("data/SHB_water-level.tsv", delim = "\t") %>% # read data set
+  mutate(date = as_date(date_time)) %>%                         # extract date
+  group_by(date) %>%                                            # group by date
+  summarize(mean_daily_level_cm = mean(water_level_cm)) %>%     # calculate daily mean
+  mutate(yday = yday(date),                                     # determine day of year
+         year = as.character(year(date)))                       # make year qualitative
+
+sch_plot <- ggplot(sch, aes(x = date, y = mean_daily_level_cm)) +
+  geom_line(color = "#136F63") +
+  geom_point(size = 0.5, color = "#136F63") + 
+  labs(title = "Brennan Brook",
+       x = "date", y = "daily mean water level [cm]") +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+
+```
+
+
+**Avery Brook**
+
+Let's take a look at the data from Schoolhouse Brook. 
+
+```{r}
+
+avb <- read_delim("data/AVB_water-level.tsv", delim = "\t") %>% # read data set
+  mutate(date = as_date(date_time)) %>%                         # extract date
+  group_by(date) %>%                                            # group by date
+  summarize(mean_daily_level_cm = mean(water_level_cm)) %>%     # calculate daily mean
+  mutate(yday = yday(date),                                     # determine day of year
+         year = as.character(year(date)))                       # make year qualitative
+
+avb_plot <- ggplot(avb, aes(x = date, y = mean_daily_level_cm)) +
+  geom_line(color = "#136F63") +
+  geom_point(size = 0.5, color = "#136F63") + 
+  labs(title = "Brennan Brook",
+       x = "date", y = "daily mean water level [cm]") +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+
+```
+Now we can combine them all into one plot:
+
+```{r}
+#| fig-height: 25
+
+prec_plot / rab_plot / sch_plot / whb_plot / brb_plot / avb_plot
+
+```
 
 :::
 
@@ -454,8 +591,8 @@ monthly <- read_delim("data/Piscat_monthly.txt",
   select(year, month, mean_monthly) %>%
   mutate(month = month(month, label = TRUE))
 
-head(monthly)
-
+head(monthly) %>%
+  kable()
 
 ```
 
@@ -464,8 +601,9 @@ Now we can plot the discharge by month.
 ```{r}
 
 ggplot(monthly, aes(x = year, y = mean_monthly, color = month)) +
-  stat_smooth(method = "lm") +
+  stat_smooth(method = "lm", se = FALSE) +
   geom_point() +
+  labs(x = "month", y = "mean monthly discharge") +
   theme_classic() +
   theme(legend.position = "bottom")
 
@@ -487,6 +625,7 @@ feb <- monthly %>%
 ggplot(feb, aes(x = year, y = mean_monthly)) +
   stat_smooth(method = "lm") +
   geom_point() +
+  labs(x = "month", y = "mean discharge for February") +
   theme_classic() +
   theme(legend.position = "bottom")
 
@@ -502,6 +641,7 @@ aug <- monthly %>%
 ggplot(aug, aes(x = year, y = mean_monthly)) +
   stat_smooth(method = "lm") +
   geom_point() +
+  labs(x = "month", y = "mean discharge for August") +
   theme_classic() +
   theme(legend.position = "bottom")
 
@@ -539,7 +679,7 @@ Describe your results. Discuss with your group how to interpret the p-value and 
 
 Now interpret your results and discuss what you have learned about the change in monthly discharge over time in the Piscataquog.
 
-Consider whether you think that this pattern would be stronger, weaker or the same for headwater streams.
+Consider whether you think this pattern would be stronger, weaker or the same for headwater streams.
 
 :::
 
