@@ -1,0 +1,503 @@
+# Introduction to R and Rstudio {#sec-introduction-to-r-and-rstudio}
+
+```{r}
+#| label: set-up
+#| include: false
+
+# set options
+knitr::opts_chunk$set(tidy = FALSE)
+options(htmltools.dir.version = FALSE)
+
+```
+
+Learning Objectives
+
+**After completing this activity you should be able to**
+
+-   Download and install `R` and `Rstudio` on your laptop
+-   Understand the main use for each of the four main panes in the `Rstudio` GUI.
+-   Understand what a package is in `R` and how to install them.
+-   Name, create, and assign values to objects.
+-   Use comments to describe your code/scripts.
+-   Call `functions` and modify the default options using their `arguments`.
+-   Understand what a `vector` is and distinguish between the main data types.
+-   Understand what a `data.frame` is and how it relates to `vectors` relate.
+
+## Install & Set up R and Rstudio on your computer {#sec-install--set-up-r-and-rstudio-on-your-computer}
+
+If you have already installed `R` and `Rstudio` on your laptop, make sure your R version is up to date. Whenever you open `Rstudio` the version will be printed in the console. In addition, you can always check what version is installed by typing `sessionInfo()` into your console. You should be using version `4.0.0` or later. You do not need to uninstall old version of `R`. If you do have to update, you will need to re-install packages (see below) for `R 4.0.0`
+
+### Windows {#sec-windows}
+
+**Install R**
+
+-   Download most recent version of R for Windows [here](https://cran.r-project.org/bin/windows/base/release.htm).
+-   Run the `.exe` file that was downloaded and follow instructions in the set-up wizard.
+
+**Install Rstudio**
+
+-   Go to Rstudio download [page](http://www.rstudio.com/ide/download/desktop).
+-   Scroll down to select the `Rstudio` current version for Windows XP/Vista/7/8/10.
+-   Run the `.exe` file that was downloaded and follow instructions in the set-up wizard.
+
+### Mac OS X {#sec-mac-os-x}
+
+**Download & install R**
+
+-   Go to (CRAN)\[http://cran.r-project.org/\], select `Download R for (Mac) OS X`.
+-   Download the `.pkg` file for your OS X version.
+-   Run the downloaded file to install `R`.
+
+**Download & install Rstudio**
+
+-   Go to Rstudio download [page](http://www.rstudio.com/ide/download/desktop).
+-   Scroll down to select the `Rstudio` current version for Mac OS X.
+-   Run the `.exe` file that was downloaded and follow instructions in the set-up wizard.
+
+## Get to know Rstudio {#sec-get-to-know-rstudio}
+
+`Rstudio` is an **Integrated Development Environment** (IDE) that you can use to write code, navigate files, inspect objects, etc. The advantage of using an IDE is that you have access to shortcuts, visual cues, troubleshooting, navigation, and auto complete help.
+
+### GUI Layout {#sec-gui-layout}
+
+GUI stands for **graphic user interface** and refers to a type of user interface that allows users to interact with software applications and electronic devices through visual elements such as icons, buttons, windows, and menus, rather than using text-based command-line interfaces.
+
+You have probably mostly interacted with computer programs through a GUI, where you manipulate graphical elements using a pointing device like a mouse, touch screen, or stylus. GUIs provide a more intuitive and user-friendly way for individuals to interact with computers and software because you can "see" what the effect of what you are doing is having. GUIs are a major departure from earlier text-based interfaces like command-line interfaces. They have contributed significantly to the widespread adoption of computers and software by making them more accessible to a broader range of users. GUIs are used in various types of software, from operating systems to applications like web browsers, image editors, word processors, and more.
+
+Not too long ago, if you had wanted to learn `R` or another programming language you would have been working directly on a console instead of an IDE like `Rstudio` which has made coding a lot more accessible to beginners because you can more easily use scripts, interactively run code and visualize data.
+
+::: {.callout-important title="Protip"}
+[Use this link to access an Rstudio IDE Cheatsheet pointing out the key features using annotated impages of the different panes](https://rstudio.github.io/cheatsheets/html/rstudio-ide.html?_gl=1*1bu7wnp*_ga*MTQwMDM2MTQ2MC4xNjkzMTA2MDUy*_ga_2C0WZ1JHG0*MTY5MzM2MzQwNy4yLjAuMTY5MzM2MzQwNy4wLjAuMA). You can also [download a pdf version and keep a printout handy as you get used to the GUI](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf).
+:::
+
+Open `Rstudio` and identify the four panes in the interface (default layout).
+
+1.  **Editor** (top left): Edit scripts/other documents, code can be sent directly to the console.
+2.  **R console** (bottom left): Run code either by directly typing the code or sending it from the editor pane.
+3.  **Environment/History** (top right): Contains variables/objects as you create them & full history of functions/commands that have been run.
+4.  **Files/Plots/Packages/Help/Viewer** (bottom right): Different tabs in this pane will let you explore files on your computer, view plots, loaded packages, and read manual pages for various functions.
+
+The panes can be customized (`View` -\> `Panes` -\> `Pane Layout`) and you can move/re-size them using your mouse.
+
+::: {.callout-warning title="Heads Up"}
+We are going to switch to have the Console in our top right and the Environment in the bottom left which makes it easier to see your code output and your script/quarto document at the same time.
+
+The easiest way to do this is to go to `View` -\> `Panes` -\> `Console on Right`.
+:::
+
+Before we move on, let's look at two easy ways to navigate longer documents and also communicate with others where we are in the document if we need help trouble shooting.
+
+First, take a look at the top of the `Viewer` Pane. There should be a button labeled `Outline`. You can toggle that on and off to show and outline of the headers used in a document. Using headers helps you structure your document into logical parts - it also means that you can jump to different sections.
+
+Second, look at the bottom left of your `Viewer` pane. You should see a little orange square with a `#` in it, if you are reading along in your `quarto document` it will currently say `GUI Layout` next to the orange `#`. If you click on it, it will give you a menu where you can select not only sections based on the headers, you will also see all the code chunks numbered. If they have been given a name using the `label` code chunk option you will be able to see that as well.
+
+### Interacting with R in Rstudio {#sec-interacting-with-r-in-rstudio}
+
+Think of `R` as a language that allows you to give your computer precise instructions (code) to follow.
+
+-   **Commands** are the instructions we are giving the computer, usually as a series of **functions**.
+-   **Executing** code or a program means you are telling the computer to run it.
+
+There are three main ways to interact with `R` - directly using console, script files (`*.R`), or code chunks embedded in R markdown (`*.Rmd`) or quarto files (`*.qmd`). We will generally be working with `quarto` documents this semester.
+
+The console is where you execute code and see the results of those commands[^a03_intro-r-1]. You can type your code directly into the console and hit `Enter` to execute it. You can review those commands in the history pane (or by saving the history) but if you close the session and don't save the history to file those commands will be forgotten.
+
+[^a03_intro-r-1]: You can think of the console as a super-powered calculator
+
+By contrast, writing your code in the script editor either as a standard script or as a code chunk in an `quarto` document allows you to have a reproducible workflow (future you and other collaborators will thank you).
+
+Executing an entire script, a code chunk, or individual functions from a script will run them in the console.
+
+-   `Ctrl` + `Enter` will execute commands directly from the script editor or a code chunk. You can use this to run the line of code your cursor is currently in in the script editor or you can highlight a series of lines to execute.
+-   If you are using a `quarto` file you can execute an entire code chunk by pressing the green arrow in the top right corner.
+
+We will run through these options, but you can always check back here while you are getting used to R.
+
+::: {.callout-important title="Protip"}
+If the console is ready for you to execute commands you should see a `>` prompt. If you e.g. forget a `)` you will see a `+` prompt - `R` is telling you that it is expecting further code. When this happens and you don't know what you are missing (usually it is an unmatched quotation or parenthesis), make sure your cursor is in the console and hit the `Esc` key.
+:::
+
+For each of our units we will have a project folder[^a03_intro-r-2] with an `Rproject`, `*.qmd`-files to complete lab assignments and write your lab report, along with sub-directories to hold the data and results that you will generate.
+
+[^a03_intro-r-2]: We will use "directory" and "folder" synonymously throughout this lab handbook
+
+Using `Rprojects` allows us to set the working directory to the folder you are currently working out of which means that for everyone the file paths will be the same. You can open an `Rproj` file by double clicking it in a file manager which will then open an instance of `Rstudio`. Alternatively, you can use the Project Icon in the top right corner of the `Rstudio` IDE to open an existing `Rproject`. If you look in the bottom left hand pane in the Files tab, the bread crumbs should lead to your project folder which has now become your working directory, i.e. all paths are relative to this location. If you navigate away from your working directory (project directory) you can quickly get back to your project directory by clicking on the project icon in the Files pane or by clicking the cog icon (`More`) and selecting `Go to Working Directory`.
+
+::: {.callout-warning title="Heads Up"}
+**Always make sure that you are in the correct `Rproject`.**
+
+We solve about 50% of problems with error messages about "files not being found" and things not running as they should by making sure that you are working out of the correct project folder and loaded `Rproject`. You can always check by looking if the name of your `Rproject` is next to the `Rproject` icon in the top right corner of `Rstudio`.
+:::
+
+We are going to be using `quarto` documents such as the one you are currently working in throughout this semester.
+
+An `qmd`-file consists of three components:
+
+-   **Header**: written in YAML format the header contains all the information on how to render the `.qmd` file.
+-   **Markdown Sections**: written in Rmarkdown syntax.
+-   **Code chunks**: Chunks of `R` code (or other code such as bash, python, …). These can be run interactively while generating your document and will be rendered when knitting the document.
+
+`Rstudio` now also has a `WYSIWYG`[^a03_intro-r-3] visual editor that will allow you to interact with `quarto` documents similar to the way you use a word processor to get **bold**, *italics* and similar `formatting`, so you do not need to learn how to write in `Rmarkdown`.
+
+[^a03_intro-r-3]: What you see is what you get
+
+You can use the render button in the editing pane to convert your `quarto` document to a wide range of formats including Word, PDF, and html.
+
+### Customize Rstudio {#sec-customize-rstudio}
+
+There are several options to customize Rstudio including setting a theme, and other formatting preferences. You can access this using `Tools > Global Options`. I recommend using a dark theme (it's a lot easier on the eyes) and keeping the panes in the same positions outlined above because it will make troubleshooting a lot easier[^a03_intro-r-4].
+
+[^a03_intro-r-4]: "You should see xx in the top left" is a lot more helpful if your top left looks like my top left!
+
+## Installing and using packages in R {#sec-installing-and-using-packages-in-r}
+
+### Install a package {#sec-install-a-package}
+
+Think of `R` packages or libraries as tool kit comprising a set of **functions** (tools) to perform specific tasks. `R` comes with a set of packages already installed that gives you base `R` functions; you can view these and determine which have been loaded in the `Packages` tab in the bottom right pane. For other tasks we will need additional packages. [^a03_intro-r-5]
+
+[^a03_intro-r-5]: Most `R` packages are found in the [CRAN repository](https://cran.r-project.org/) and on [Bioconducter](https://www.bioconductor.org/), developmental packages are available on [github](https://github.com/).
+
+A central group of packages for data wrangling and processing form the [tidyverse](https://www.tidyverse.org/), described as "... *an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.*" - We are going to heavily rely on core functions from the tidyverse to wrangle, summarize, visualize and analyze data.
+
+When you install packages they will be downloaded and installed onto your computer. Determine what your default path is using `.libPaths()` and change if necessary.
+
+The easiest way to install packages directly in the console is to use the `install.packages()` function.
+
+Execute the code chunk below to install some libraries to get us started[^a03_intro-r-6] by placing your cursor somewhere in the code and hitting `Ctrl` + `Enter` or by clicking on the green arrow in the top right corner of the code chunk.
+
+[^a03_intro-r-6]: We will install other libraries as needed down the line.
+
+```{r}
+#| eval: false
+
+# install central packages in the tidyverse
+install.packages("tidyverse",
+                 "janitor",
+                 "glue",
+                 "here",
+                 "tibble",
+                 "ggthemes",
+                 "knitr",
+                 "tidymodels",
+                 "penguins")
+
+```
+
+::: {.callout-important title="Protip"}
+You can also install packages using the `Packages` tab in the bottom right pane. Select the `Packages` tab and then click on the `Install` button to pull up a dialogue box. Type the packages you want to install into the Packages box and confirm using `Install`.
+:::
+
+Let's check if you were able to successfully install those packages by ensuring you can load them. Any time you start a new `R session` (e.g. by closing `Rstudio` and restarting it), you will need to load your libraries beyond the base libraries that are automatically loaded using the `library()` function in order to be able to use the functions specific to that package[^a03_intro-r-7].
+
+[^a03_intro-r-7]: Troubleshooting tip: if you get an error along the lines of `function() cannot be found` the first thing you will want to do is check if your libraries are loaded!
+
+```{r}
+
+# load library
+library(tidyverse)
+
+```
+
+If you don't see any error messages in the console along the lines of `there is no package called ...` you are all set. If you look in the `packages` tab in the lower right panel you should also see that packages such as `dplyr` and `tidyr` (two of the central `tidyverse` packages) now have a little check box next to them.
+
+### Updating R packages {#sec-updating-r-packages}
+
+You should generally make sure to keep your `R` packages up to date as new versions include important bugfixes and additional improvements. The easiest way to update packages is to use the `Update` button in the `Packages` tab in the bottom right panel. Over the course of the semester you should not have to do this, but when you install new packages you might get message that some of your packages need to be updated which you can then either choose to do at that point or ignore.
+
+::: {.callout-warning title="Heads Up"}
+Be aware that updating packages might break some code you have previously written. For most of what we will be doing this should not be the case. If you used `R` for a previous course, make sure to update you packages at the beginning of this course and we should be set for the semester.
+:::
+
+## R is all about `Objects` {#sec-r-is-all-about-objects}
+
+You can think of the `R console` as a super-powerful calculator.
+
+You can get output from `R` by simply typing math directly into the console.
+
+```{r}
+
+13 + 29
+
+```
+
+or
+
+```{r}
+
+546 / 13
+
+```
+
+Well that's fun - but not super helpful in our context.
+
+In the `R` programming language, an object is a fundamental concept used to store, manipulate, and represent data. Everything in `R` is treated as an object, whether it's a number (`numeric`), a text string (`character`), a data set (`data.frame`), or even more complex data structures.
+
+`Objects` in R can be created, modified, and used to perform various operations. `Objects` are assigned names that you can then use to reference them in your code. When you create an `object`, you're essentially creating a container that holds a `value` or data.
+
+Creating an `object` is straightforward. First, we give it a name, then we use the `assignment operator` to assign it a `value`. The `assignment operator` (`<-`) assigns the `value` on the right of the `<-` to the `object` on the left[^a03_intro-r-8].
+
+[^a03_intro-r-8]: Start building good habits starting now in terms of your coding style. For example, your code is a lot more readable if you use white space to your advantage. For example, make sure you have a space before and after your `<-`
+
+Execute the code in the code chunk below by placing your cursor somewhere in the line of code and hitting `Ctrl` + `Enter` or by clicking on the little green arrow on the right hand side of the code chunk.
+
+```{r}
+
+# create object
+length_mm <- 344
+
+```
+
+If you look at your `Global Environment` (bottom left panel) you should now see `length` and the `value` you assigned it.
+
+Notice, how when you assigned a `value` to your new `object` nothing was printed in the console compared to when you were typing in math.
+
+To print the `value` of an `object` you can type the name of the object into the console.
+
+```{r}
+
+# print value in the console
+length_mm
+
+```
+
+Now that `length` is in your environment we can use it to compute instead of the `value` itself.
+
+For example, we might need to convert our length from millimeters (mm) to centimeters (cm).
+
+```{r}
+
+# divide value of object by 10
+length_mm / 10
+
+```
+
+We can change the `value` of an `object` any time by assigning it a new one. Changing the `value` of one `object` does not change the `values` of other objects.
+
+```{r}
+
+# assign new value
+length_mm <- 567
+
+```
+
+::: {.callout-tip title="Give it a try"}
+Create a new object called `length_cm` with the length in centimeters. Then change the value of our object with the length in millimeters to 50. What do you think the value of `length_cm` will be now?
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+```{r}
+
+# create object with length in cm
+length_cm <- length_mm / 10
+
+# change value
+length_mm <- 50
+
+```
+
+You should see that only the `length_mm` variable has changed but not the `length_cm` object. Those are completely independent from each other even though you initially used the `length_mm` object to create the other one.
+:::
+
+::: {.callout-important title="Protip"}
+Theoretically, we can name objects anything we want - but before that gets out of hand let's think about some guidelines for naming objects.
+
+-   Make them simple, specific, and not too long (otherwise you will end up with a lot of typing to do and difficulties remembering which object is which).
+-   Object names cannot start with a number.
+-   R is case sensitive, `length_mm` is not the same as `Length_mm`.
+-   Avoid using dots (`.`) in names. Typically dots are used in function names and also have special meaning (methods) in R.
+-   Some names are already taken by fundamental functions (e.g. `if`, `else`, `for`) and cannot be used as names for objects; in general avoid using names that have already been used by other function names.
+-   Rule of thumb: nouns for object names, verbs for function names.
+
+This semester you will mostly execute code already written for you or make minimal modifications. However, be observant of the coding style and mimic it to develop good practices. Using a consistent style for naming your objects is part of adopting a consistent styling of your code; this includes things like spacing, how you name objects, and upper/lower case. Clean, consistent code will make following your code a lot easier for yourself and others.
+:::
+
+## Using comments {#sec-using-comments}
+
+You can add comments to your `R scripts` using `#`. Essentially, once you type an `#` in a line anything to the right of it will be ignored.
+
+This is really helpful as it will allow you to comment your script, i.e. you can leave notes and explanations as to what your code is doing for future you and for other collaborators. This is especially helpful if you come back to some of your code after a period of time, if you are sharing your code with others, and when you are debugging code. You will find that as you become more experienced your comments will become shorter and more concise and you might even be tempted to leave them out completely - don't[^a03_intro-r-9]!
+
+[^a03_intro-r-9]: To help you build a habit of good commenting practice, commenting your code is a requirement for your homework assignment and skills tests.
+
+You can add comments above or next to a line of code. For detailed comments you may want to include multiple lines of comments but you will need to add a `#` for every line of comment.
+
+::: {.callout-tip title="Give it a try"}
+Execute this code line by line by placing your cursor above the first comment and hitting `Ctrl` + `Enter` and compare differences in behavior.
+
+```{r}
+
+# total length fish
+length_mm <- 436
+
+length_mm <- 436  # total length fish
+
+# total length of fish
+# this measurement is in millimeters
+length_mm <- 436
+
+```
+:::
+
+::: {.callout-important title="Protip"}
+You can comment/uncomment multiple lines at once by highlighting the lines you want to comment (or uncomment) and hitting `Ctrl + Shift + C`. This can be useful if you are playing around with code and don't want to delete something but don't want it to be run either.
+:::
+
+## Functions {#sec-functions}
+
+When we installed `R packages` earlier we mentioned that they comprise sets of predefined `functions`. These are essentially mini-scripts that automate using specific sets of commands. So instead of having to run multiple lines of code (this can be 10s - 100s of lines code) you *call* the function instead.
+
+Each function usually requires multiple inputs (**arguments**) and once executed will generally return a `value` .
+
+For example the function `round()` can be used to round a number[^a03_intro-r-10].
+
+[^a03_intro-r-10]: This is an excellent example of naming things well!
+
+```{r}
+
+# create object with rounded number
+length_cm <- round(34.8821)
+
+```
+
+If we print the value of our object to the console, we see the following value is returned.
+
+```{r}
+
+# call vector
+length_cm
+
+```
+
+For this function the input (**argument**) is a number and the returned **value** is also a number. This is not always the case, arguments can be numbers, objects, file paths ...
+
+Many functions have set of arguments that alter the way a function operates - these are referred to as `options`. Generally, they have a default value which are used unless specified otherwise by the user.
+
+You can determine the arguments as function by calling the function `args()`.
+
+```{r}
+
+# query arguments
+args(round)
+
+```
+
+Or you can call up the help page using `?round` or by typing it into the search box in the `Help` tab in the lower right panel.
+
+For example, our `round()` function has an argument called `digits`, we can use this to specify the number of significant digits we want our rounded value to have.
+
+```{r}
+
+# round value to two digits
+round(34.8821, digits = 2)
+
+```
+
+::: {.callout-important title="Protip"}
+Good code style is to put the non-optional arguments (frequently the object, file path or value you are using) first and then specify the names of all the optional arguments you are specifying. This provides clarity and makes it easier for yourself and others to follow your code.
+:::
+
+Occasionally you might even want to use comments to further specify what each argument is doing or why you are choosing a specific option.
+
+```{r}
+
+round(34.8821,     # number to round
+      digits = 2)  # specify number of significant digits
+
+```
+
+## Data Types I: Vectors {#sec-data-types-i-vectors}
+
+Now that we've figured out what objects and functions are let's get to know the two data types we will be spending the most time with this semester - `vectors` and data frames (`data.frame`)[^a03_intro-r-11].
+
+[^a03_intro-r-11]: Other data types include lists (`list`), factors (`factor`) matrices (`matrix`), and arrays (`array`).
+
+The most simple data type in R is the (atomic) `vector` which is a linear vector of a single type. There are six main types -
+
+-   `character`: strings or words.
+-   `numeric` or `double`: numbers.
+-   `integer`: integer numbers (usually indicated as `2L` to distinguish from `numeric`).
+-   `logical`: `TRUE` or `FALSE` (i.e. boolean data type).
+-   `complex`: complex numbers with real and imaginary parts (we'll leave it at that).
+-   `raw`: bitstreams (we won't use those either).
+
+You can check the data type of any object using `class()`.
+
+```{r}
+
+# query class of object
+class(length_mm)
+
+```
+
+Currently, our `length_mm` object consists of a single value. The function `c()` (concatenate) will allow us to assign a series of values to an object.
+
+```{r}
+
+# create numerical vector
+length_mm <- c(454, 234, 948, 201)
+
+# print to console
+length_mm
+
+```
+
+::: {.callout-tip title="Consider this"}
+Predict what data type you expect this vector to be.
+:::
+
+We call the same function to create a `character vector`.
+
+```{r}
+
+# create character vector
+species <- c("Adelie", "Gentoo", "Chinstrap")
+
+# query class
+class(species)
+
+```
+
+The quotes around `"Adelie"` etc. are essential because they indicate that this is a character.
+
+::: {.callout-important title="Protip"}
+If we do not use quotes, R will assume that we are trying to call an object and you will get an error code along the lines of "`! object 'Adelie' not found`".
+:::
+
+You can use `c()` to combine an existing object with additional elements (assuming they are the same data type).
+
+```{r}
+
+# add element to vector
+species <- c(species, "Emperor")
+
+# call vector
+species
+
+```
+
+## Data Types II: Data frames {#sec-data-types-ii-data-frames}
+
+Recall that **atomic vectors** are *linear* vectors of a simple type, essentially they are one dimensional. Frequently we will be using data frames (`data.frame`) which you can think of as consisting of several vectors of the same length where each vector becomes a column and the elements are the rows.
+
+Let's create a new object that is a `data.frame` with three columns containing information on species and length in millimeters.
+
+```{r}
+
+# combine vectors into data frame
+df <- data.frame(species, length_mm)
+
+```
+
+You should now see a new object in your `Global Environment` and you will now also see that there are two categories of objects `Data` and `Values`. You will see that the `data.frame` is described as having 3 obs (observations, those are your rows) of 2 variables (those are your columns). If you click on the little blue arrow it will give you additional information on each column - note that because each column is essentially a vector, each one must consist of a single data type which is also indicated.
+
+You can further inspect the `data.frame` by clicking on the little white box on the right which will open a tab in the top left panel next to your R script. You can also always view a `data.frame` by calling the `View()` function.
+
+```{r}
+#| eval: false
+
+# view data frame in View Panes
+View(df)
+
+```
+
+This can be a helpful way to explore your `data.frame`, for example, clicking on the headers will sort the data frame by that column. Usually we won't build or `data.frames` by hand, rather we will read them in from e.g. a tab-delimited text file - but more on that later.

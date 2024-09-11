@@ -1,0 +1,51 @@
+project:
+  type: book
+
+book:
+  title: "Conservation Biology"
+  subtitle: "BI 328 | Fall 2024 | Saint Anselm College"
+  author: "Shannon J. O'Leary"
+  date: today 
+  chapters:
+    - index.qmd
+    
+
+    - part: A_stream-characterization.qmd
+      chapters:
+        - A01_watersheds.qmd
+        - A02_USGSgages.qmd
+        
+    - part: B_stream-health-macroinverts.qmd
+#      chapters:
+#        - B01.qmd
+
+        
+    - part: C_brook-trout.qmd
+#     chapters: 
+#        - C01.qmd
+
+    - part: D_set-up.qmd
+      chapters:
+        - D01_intro-R.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: sandstone
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    code-fold: false
+    code-overflow: scroll
+    code-copy: hover
+    number-sections: true
+    anchor-sections: true
+    embed-resources: true
+  pdf:
+    documentclass: scrreprt
+
+reference-location: margin
+citation-location: margin
+fig-cap-location: margin
+tbl-cap-location: margin

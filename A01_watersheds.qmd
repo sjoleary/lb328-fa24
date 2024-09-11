@@ -1,0 +1,38 @@
+# Characterizing the Piscataquog watershed
+
+The goal of this lab is for you to gain a comprehensive understanding of watersheds are by exploring the Piscataquog watershed. After completing these exercises, you should be able to explain what a watershed is, identify its key components, discuss the vulnerabilities of watersheds, especially those arising from human activities, and argue for the importance of maintaining healthy watersheds from both human and ecosystem perspectives. 
+
+During lab you will be introduced to three mapping tools that you will use to categorize and assess the ecosystem health of the Piscataquog watershed using major assessment categories. The goal of this assignment is for you to get a broad overview of different categories that you can then use as context to understand the data sets we will explore and also compare "our" watersheds to others. 
+
+Over the course of the semester we will characterize the headwater ecosystems in more detail
+
+* **Hydrology**: Characterization of the flow of water within the watershed, identifying sources, flow paths, and how water is stored and moves through the system.
+* **Temperature**: Characterization of thermal regimes and how these determine habitat availability.
+* **Water quality**: Characterization of physical and chemical characteristics including dissolved oxygen, nutrient levels, conductivity and others.
+* **Habitat & Biodiversity**: Characterization of different types of habitats within the watershed and the species that depend on these habitats and the biodiversity within the watershed, and how changes in land use and water quality affect these habitats.
+* **Landscape and Geomorphology**: Examination of the physical landscape of the watershed, including landforms, soil types, and vegetation, how these features influence water flow and ecosystem health, as well as how they may be affected by natural and anthropogenic changes.
+* **Anthropogenic Effects**: Identification of human activities within the watershed, including urban development, agriculture, and industry and assessment of how these activities impact the watershed’s health and discuss potential mitigation strategies.
+* **Ecosystem Health**: Assessment of overall health of the watershed using major categories such as water quality, habitat integrity, biodiversity, and presence of invasive species as well as signs of ecosystem stress and resilience.
+
+This week we will learn how to use three mapping tools that will allow us to characterize the Piscataquog Watershed:
+
+* [USGS Streamstats](https://streamstats.usgs.gov/ss/)
+* [Stroud Water Research Center: Model my Watershed](https://modelmywatershed.org/)
+* [EPA How's My Waterway?](https://mywaterway.epa.gov/)
+
+
+::: {.callout-tip title="Give it a try"}
+
+With your learning group use the mapping tools you have been introduced to to explore characteristics of the Piscataquog watershed, discuss your findings as a group, decide what your key findings are and determine how you can clearly communicate those. A good way to do this is to formulate 3-5 key statements, and then decide how to present details (tables, figures, maps, numbers). You probably have space to print 3-5 letter pages, remember that you want font sizes that are legible! The goal is that you "lower the cognitive burden" of your viewers - i.e. you have already done the thinking for them. Show up for lab with a plan of what you want to post on the poster board. You should also think about how you want to title the board as a whole and you section specifically. We will have some time at the beginning of lab for you to (very, very informally, you don't even have to stand up) present what your group learned to the other groups. Then we'll make a final decision on what needs to be printed and put up on the board.
+
+:::
+
+::: {.callout-tip title="Consider this"}
+
+Write a short (250 - 500 words) reflection on what you are learning:
+
+* define what a watershed is
+* describe what you learned from your exploration using the mapping tools
+* outline what questions you think would be interesting to further investigate about headwater streams in the Piscataquog watershed to better understand the health of these ecosystems.
+
+:::

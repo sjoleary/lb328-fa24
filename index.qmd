@@ -1,0 +1,13 @@
+
+![](images/BI328.png){fig-align="center" fig-alt="Course logo with planet and BI328 Conservation Biology written on it"}
+
+
+# Overview {.unnumbered}
+
+Welcome to our lab handbook for `Conservation Biology (Fall 2024)` - it will be continuously updated throughout the semester. For the most part an electronic copy is sufficient^[You can go "split screen" on your laptop which will allow you to cut and paste code if needed or if you have a tablet you can pull up the manual there which gives you a better simultaneous viewing experience but then you cannot cut and paste text between the manual and `Rstudio`], if you need to print anything for a class I will let you know.
+
+Over the course of ths semester we will be exploring a set of headwater streams in the Piscataquog watershed that are located around Francestown and New Boston that have been monitored by faculty at Saint Anselm College for >15 years.
+
+We will do this in three units. First, we will explore hydrological, physical, and chemical characteristics of the Piscataquog and a set of headwater streams. Then we will explore the macroinvertebrate biodiversity as bioindicators for ecosystem health. Finally, we will use environmental DNA to determine which of these stream currently function as brook trout habitat. At the end of the semester, we will consider how our eocystem health assessment can be used to inform management and conservation efforts of these important headwater ecosystems.
+
+Throughout the semester we will communicate our findings with visitors in Goulet by (re)designing a poster board. 

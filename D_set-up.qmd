@@ -1,0 +1,7 @@
+# All Biology is Computational Biology
+
+Even though you might not consider yourself a "computer person" at this point you cannot get around a fundamental computer literacy and ideally having a few more advance computational tools in your tool kit in the environmental sciences^[Given the advances in instrumentation, arguable we invented big data!].
+
+This semester we will explore various data sets using mapping/GIS tools that make data publicly available and explorable. We will also use R and Rstudio to explore data sets in more detail.
+
+Have an open and flexible mindset - R can have a steep learning curve and things might go wrong but once you get the hang of it, it is a very powerful tool with a wide range of applications. Many State and Federal agencies use R to summarize, analyze, and visualize their data sets and many of them have even created R packages to allow you to interact with their data.

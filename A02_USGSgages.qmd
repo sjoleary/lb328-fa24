@@ -1,0 +1,547 @@
+
+# Characterizing the hydrological regime of the Piscataquog river & headwater streams
+
+## Water stage and water flow
+
+Time series of water stage and water flow are two measurements of water that can be used to describe the hydrological regime in a river or stream.
+
+* The water level or gage height in a stream or river is measured in relation to a fixed reference point. In the US this is typically measured in feet.
+* The water flow (stream flow or discharge) is the amount of water that passes a specific point in a stream or river during a specific time period is typically measure in feet per second (cfs) or cubic meters per second (cms).
+
+::: {.callout-tip title="Consider this"}
+
+Consider how water stage and stream flow are related. Argue which parameter you think is more informative discuss what that information can be used for. Speculate what methods and types of instruments you could use to determine each of these metrics.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+The water stage is used to predict water flow which is more difficult to measure directly. To do this you need to develop a stage-discharge rating curve for a site by measuring both water level and streamflow over a range of flows, this curve can then be used to calculate water flow measured from water levels.
+
+Water stage is measured using a variety of methods, including
+
+* Pressure transducers
+* Staff gages
+* Crest stage gages
+* Measure downs from a defined point
+* Cameras
+* Water level radar
+
+:::
+
+Here are two articles from the USGS to give you an overview of their efforts to monitor streamflow in the United States:
+
+* [Streamgaging Basics](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics)
+* [How Streamflow is Measured](https://www.usgs.gov/special-topics/water-science-school/science/how-streamflow-measured#overview)
+
+::: {.callout-tip title="Consider this"}
+
+Discuss what factors and mechanisms cause changes in streamflow. Categorize them as natural or human-induced. Rank them in terms you think are the most important in general and specifically for the Piscataquog River compared to its headwater streams.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+Read over [this article from USGS discussing stream flow and the water cycle](https://www.usgs.gov/special-topics/water-science-school/science/streamflow-and-water-cycle)
+
+Here is the list of mechanisms they list:
+
+Natural mechanisms
+
+* Runoff from rainfall and snowmelt
+* Evaporation from soil and surface-water bodies
+* Transpiration by vegetation
+* Groundwater discharge from aquifers
+* Groundwater recharge from surface-water bodies
+* Sedimentation of lakes and wetlands
+* Formation or dissipation of glaciers, snowfields, and permafrost
+
+
+Human-induced mechanisms
+
+* Surface-water withdrawals and transbasin diversions
+* River-flow regulation for hydropower and navigation
+* Construction, removal, and sedimentation of reservoirs and stormwater detention ponds
+* Stream channelization and levee construction
+* Drainage or restoration of wetlands
+* Land-use changes such as urbanization that alter rates of erosion, infiltration, overland flow, or evapotranspiration
+* Wastewater outfalls
+* Irrigation
+* Wastewater return flow
+
+:::
+
+::: {.callout-tip title="Consider this"}
+
+Discuss problems that could be associated with too much discharge and too little discharge.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+Low discharge means that little water is available for uses such as irrigation. It also results in fragmenting the habitat and for example would block the passage of anadromous fishes.
+
+Too much discharge means flooding.
+
+:::
+
+
+## Exploring variability in stream flow
+
+Let's start by taking a peak at publicly available data sets that characterize stream flow. In this activity we will use data from the United States Geologic Survey (or USGS) network of stream gaging stations. The USGS is a governmental organization established in 1879, as part of the Department of the Interior. Originally tasked with the classification and mapping of United States public lands (and assessment of their mineral resources), the USGS has since expanded their role as a provider of impartial information on the status of ecosystems in the United States. See [http://www.usgs.gov](http://www.usgs.gov) for more details.
+
+### Viewing and accessing data
+
+Start by Navigate to the [USGS Water Dashboard](https://dashboard.waterdata.usgs.gov/)
+
+Notice the colored dots, depicting real-time conditions at stream gages nationwide. The dots are colored to show you if the streamflow is unusually high or low for this day of the year.
+
+::: {.callout-tip title="Give it a try"}
+
+Click on “legend” at the upper right to see what the colors mean.  
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+Red colors are unusually low; blue colors are unusually high.
+
+For example, the dark blue color indicates that the flow is at or above the 90th percentile, which tells you that at least 90% of the flows measured on this day in the past were lower.  Put another way, flow is high enough to earn the dark blue dot only about 10% of the time.
+
+:::
+
+::: {.callout-tip title="Consider this"}
+
+Get an overview of the continental US - are there patterns you can discern in terms of where locations are experiencing especially high or especially low discharge?
+
+:::
+
+Clicking on any of the colored dots to bring up a pop-up window with a plot of discharge over the past week.  
+
+::: {.callout-tip title="Give it a try"}
+
+Try this now, then close the pop-up window when you are finished.
+
+:::
+ 
+Let’s determine where the USGS is monitoring the Piscataquog River here in New Hampshire. Zoom into the Goffstown/New Boston Area to fin the South Branch Piscataquog River gaging station. Click on it to pull up the pop up window.
+
+At the top of the pop-up window, click the link to open the `Site Pag`e, which is a more detailed description of the site.  
+
+Take a look at the data available and then scroll back to the top to see the different types of data that we can show.  Leaving the range at 7 days, select “Discharge, cubic feet per second” to see a plot showing how discharge has changed over the past week.
+
+::: {.callout-tip title="Explore the data set"}
+
+Look at the discharge data. How variable was discharge over the past week?  
+
+You can answer this in several ways.  First, what was the range (the maximum minus the minimum) of the data? Another good way to think about variability is to think about percent change. First, estimate the mean value of the data by looking at the plot. Approximately how much higher (as a percent) are the highest discharges? 
+
+Where you clicked the box to select discharge data, check the box that says “Select data to graph on second y axis,” and choose water temperature.  Look at the temperature graph.  Based on this graph, what probably drives temperature changes? Do you think there is any relationship between temperature and discharge? If so, what do you think it might be?
+
+When discharge is high enough, flooding occurs. Is the discharge you observe here unusually high? Unusually low? Typical for the region? Can we answer these questions with only a week’s worth of data?
+
+:::
+
+Let's think about seasonal patterns in stream flow.
+
+::: {.callout-tip title="Explore the data set"}
+
+We might expect flow in a stream to change seasonally. After all, most (or all) of the streamflow that you observe originated as rain and snow falling in the watershed, and precipitation in most places is seasonally variable. Let’s take a look at how streamflow changes over an entire year to see what happens.
+
+Still looking at both discharge and temperature data, go back to the top and change the time range to 1 Year.  It may take a minute to load all of the data.
+
+Temperature is high in summer and low in winter, as you might expect – but what month was the warmest?  What about discharge? Was it the same all year? What months had the highest discharge? The lowest?
+
+:::
+
+
+## Exploring the relationship of precipitation and discharge in the Piscataquog River
+
+Precipitation is arguably one of the key mechanisms impacting stream discharge. Not only do levels and intensity of precipitation events vary across a year. However, there are a variety of factors that will alter how precipitation impacts the flow regimes of streams. 
+
+Even in systems where there is little urbanization differences in the type of vegetation and ground cover present will modify t he impact of precipitation. For example, here in the Northeast we have certain times of the year where the vegetation is active and growing which means that it is pulling moisture out of the soil and some of that water then evaporates off of the leaf surfaces (Evapotranspiration). When the ground is soft and absorbent water can seep in but during large parts of the year the ground is frozen. Ground cover might consist of newly-fallen leaves in the Fall, while in the Winter it is covered with snow. All these factors will alter how much and how quickly precipitation enters a stream.
+
+### Download the discharge data set
+
+On the top menu of the site page, click on `Data Inventory` and select `daily data`.
+
+Let's set up how we want to format our data:
+
+* In the Box for Available Parameters select `Discharge(Mean)`.
+* for output format select `Tab-separated`.
+* for days type in `365` to give us a years worth of data.
+
+Once you are all set click the `Go` button
+
+This will open a new page with your data. Right click and select `Save As` (or use `Ctrl` + `S`). And save the data in your `01_watershed/data` folder as `piscat_365.txt`.
+
+
+### Download weather data
+
+Now, let's find some weather data.
+
+Go to the [NOAA National Centers for Environmental Information](https://www.ncdc.noaa.gov/cdo-web/). 
+
+In the top menu click on `Data Sets`, then expand the `Daily Summaries` drop down. 
+
+Now select the `Search Tool`. Which will open a page we can use to query precipiation data that is representative of the Piscataquog near our USGS gage site.
+
+We downloaded a years worth of discharge data, so we will want an equivalent data set. Set the begin date to one year ago and the end date to the most recent data.
+
+In the `Search For` box use the drop down to change to `City` and search for `Goffstown, NH`. Then use the map to select a weather station that is representative of our location. By selecting `Add to Cart`.
+
+You should now see 1 item in your cart in the top right of the screen. Click on your Cart. In the select Cart Options select the `Custom GHCN-Daily CSV` format. And double check your `Date Range`.
+
+Click Continue. In the `select data types for custom output`, expand the `Precipitation section` and select only `Precipitation (PRCP)`.
+
+Click Continue. Enter your email (twice) and click Submit Order. You will receive an email confirming your order and then you, we've got a tiny data set we've requested so our order should not take too long to process.
+
+You can also click on the `Check order` button and if it has processed you can download the data set from there.
+
+After you download the data, rename it `man_precipitation.csv`^[You shouldn't have to change the file ending] and move it into your `01_watersheds/data` folder.
+
+
+### Visualize & Compare our data sets
+
+Well, that was exciting... Now that we have our data in hand, let's take a look at what we find.
+
+::: {.callout-tip title="Consider this"}
+
+Before we start:
+
+* Discuss with your group how we should visualize the discharge and the precipitation data to get an overview of how these have changed over the year.
+* Think about how we could determine "typical flow", "high flow", "low flow".
+* Argue what patterns you might expect to see in terms of how these patterns are related.
+
+:::
+
+Let's start by pulling in our discharge data and visualizing it (you've already sneak peaked what it looks like when we were exploring the real time data).
+
+```{r}
+
+# read libraries
+library(readr)
+library(janitor)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(plotly)
+library(knitr)
+
+# read data set
+discharge <- read_delim("data/piscat_365.txt",
+                        skip = 27,
+                        delim = "\t",
+                        col_names = c("agency", "site_no", "date", "discharge_cfs", "flag"))
+
+# check data
+head(discharge) %>%
+  kable()
+
+```
+
+Next we can visualize it using a line graph:
+
+```{r}
+
+ggplot(discharge, aes(x = date, y = discharge_cfs)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Date", y = "Daily Mean Discarge (cubic feet per second)") +
+  theme_classic()
+
+```
+
+Let's take a look at our precipitation data over the same time period.
+
+```{r}
+
+# read data
+precip <- read_delim("data/man_precipitation.csv",
+                     delim = ",") %>%
+  clean_names()
+
+# check data
+head(precip)
+
+```
+
+Now let's plot this data set as a bar graph:
+
+```{r}
+
+ggplot(precip, aes(x = date, y = prcp)) +
+  geom_bar(stat = "identity", color = "darkblue") +
+  theme_classic()
+
+```
+
+We can plot both into the same figure if we would like. To do this we will use the `patchwork` package which allows us to create objects that will hold our individual figures and then we can plot them underneath each other for easier comparison.
+
+```{r}
+
+p1 <- ggplot(precip, aes(x = date, y = prcp)) +
+  geom_bar(stat = "identity", color = "darkblue") +
+  labs(x = "", y = "daily total precipitation") +
+  theme_classic()
+
+p2 <- ggplot(discharge, aes(x = date, y = discharge_cfs)) +
+  geom_line() +
+  geom_point() +
+  labs(x = "Date", y = "Daily Mean Discarge [cf]") +
+  theme_classic()
+
+p1 / p2
+
+```
+
+
+::: {.callout-tip title="Consider this"}
+
+Describe each figure on its own and then compare and contrast the two figures:
+
+* Do your predictions about relationships hold water (sorry, couldn't) resist?
+* If not, what could be contributing factors? other mechanisms impacting discharge?
+* Consider differences in season (winter, spring, summer, fall) and different types of precipitation.
+* Think about intensity and duration of rain events.
+* Consider the temporal scale at which mechanisms impacting discharge might vary: type of soil, amount/type of vegetation, presence of impervious surfaces, temperature, ground cover, saturation of soil,...
+
+Summarize your results and insights - hang onto these, you will likely want to refer to them when we think about how we want to design our next poster board iteration.
+
+:::
+
+## Exploring patterns of water flow in headwater streams.
+
+We are currently monitoring water level changes in five headwater streams using data loggers. These are attached to a rock and placed in the bottom of the headwwater streams, typically in pools where there is less chance for them to be washed out.
+
+* Avery Brook (AVB)
+* Schoolhouse Brook (SHB)
+* Whiting Brook (WHB)
+* Brennan Brook (BRB)
+* Rand Brook (RAB)
+
+At Rand Brook we have a paired logger recording air temperature and pressure. We can calculate the difference between air and water pressure and divide that by the product of the density of water and the gravitational pull to determine the absolute height of the water column above the data logger and track changes in water levels over time.
+
+::: {.callout-tip title="Consider this"}
+
+Consider about the relationship of water flow, water level, and stream discharge and evaluate how useful this data is to understand changes in stream flow over time and possible caveats in interpreting this information.
+
+Describe additional measurements you would need to make this information more useful.
+
+:::
+
+Let's take a look at the data from Rand Brook. In addition to reading in the data, we will split the time stamp into date and time, to calculate mean daily water level. Then we will extract the year into a separate column as well as determine the Julian Day^[]
+
+```{r}
+
+rab <- read_delim("data/RAB_water-level.tsv", delim = "\t") %>%
+  mutate(date = as_date(date_time)) %>%
+  group_by(date) %>%
+  summarize(mean_daily_level_cm = mean(water_level_cm)) %>%
+  mutate(yday = yday(date),
+         year = as.character(year(date)))
+
+```
+
+Now we can plot the change in water level over the course of a year.
+
+```{r}
+
+ggplot(rab, aes(x = yday, y = mean_daily_level_cm, color = year)) +
+  geom_line() +
+  geom_point(size = 0.5) +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+
+```
+
+That's a bit tricky to see so we can also split each year into a separate panel:
+
+```{r}
+
+ggplot(rab, aes(x = yday, y = mean_daily_level_cm)) +
+  geom_line() +
+  geom_point(size = 0.5) +
+  facet_grid(. ~ year) +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+
+```
+
+Or we could just plot it by date:
+
+```{r}
+
+ggplot(rab, aes(x = date, y = mean_daily_level_cm)) +
+  geom_line() +
+  geom_point(size = 0.5) +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+
+```
+
+Let's compare our data sets to the precipitation over that time. Don't worry, I have already downloaded the data through the NOAA climate page, it is waiting for you in the google folder.
+
+
+
+```{r}
+
+precip_2021 <- read_delim("data/precipitat_2021-2024.csv", delim = ",") %>%
+  clean_names()
+
+```
+
+Let's take a look:
+
+```{r}
+
+ggplot(precip_2021, aes(x = date, y = prcp)) +
+  geom_bar(stat = "identity", color = "darkblue") +
+  theme_classic()
+
+```
+
+::: {.callout-tip title="Give it a try"}
+
+Use your new found skills to read in data and plot it to repeat the same process we just completed for Rand Brook for the remaining locations.
+
+You should also find a daily discharge file for the same time period for the Piscataquog in our google folder.
+
+Create a plot that contains the precipitation data as well as the water level data for each headwater stream location. You will notice that there are some gaps in the data because ... well, that's just how science goes sometimes. We tried.
+
+Compare and contrast the headwater streams to each other and the precipitation data and then compare your results to what you learned about this relationship in the Piscataquog River.
+
+Summarize your results and insights - hang onto these, you will likely want to refer to them when we think about how we want to design our next poster board iteration.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+
+
+:::
+
+## Characterizing changes in discharge over time
+
+One question that you have thrown out repeatedly is whether the conditions are changing over time due to climate change. We can take a look at this.
+
+### Long-term Piscataquog River changes in stream flow.
+
+::: {.callout-tip title="Consider this"}
+
+How do you expect climate change to alter patterns of precipitation? What other factors could be changing due to climate change that could impact stream discharge?
+
+:::
+
+In the data sets that we have looked at previously, we were looking at daily means - this introduces a lot of variability into the data set. Instead, we can access Monthly Statistics, another strategy we can use is to assess summer and winter months separately.
+
+Let's go back to the [USGS Water Dashboard](https://dashboard.waterdata.usgs.gov/) and pull up the South Branch Piscataquog River USGS station. Select the `Site Page` and  from `Data Inventory` select `Monthly Statistics`.
+
+Next, check the box next to discharge and leave the date range blank to get the entire date range. Choose tab-separated data in YYYY-MM-DD format, and save to file. Once you click Submit, a text file called “download” will be saved to your computer (likely the Downloads file.
+
+Rename it `Piscat_monthly.txt` and move it to your `01_watershed/data` folder.
+
+Let's read that file into `R`.
+
+```{r}
+
+monthly <- read_delim("data/Piscat_monthly.txt",
+                      skip = 37,
+                      col_names = c("agency", "site_no", "parameter", "ts_id",
+                                    "year", "month", "mean_monthly")) %>%
+  select(year, month, mean_monthly) %>%
+  mutate(month = month(month, label = TRUE))
+
+head(monthly)
+
+
+```
+
+Now we can plot the discharge by month.
+
+```{r}
+
+ggplot(monthly, aes(x = year, y = mean_monthly, color = month)) +
+  stat_smooth(method = "lm") +
+  geom_point() +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+```
+
+::: {.callout-tip title="Consider this"}
+
+Discuss your results.
+
+:::
+
+This is a bit messy, so let's pick February to represent winter and re-plot our data.
+
+```{r}
+
+feb <- monthly %>%
+  filter(month == "Feb")
+
+ggplot(feb, aes(x = year, y = mean_monthly)) +
+  stat_smooth(method = "lm") +
+  geom_point() +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+```
+
+And let's pick August to represent summer.
+
+```{r}
+
+aug <- monthly %>%
+  filter(month == "Aug")
+
+ggplot(aug, aes(x = year, y = mean_monthly)) +
+  stat_smooth(method = "lm") +
+  geom_point() +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+```
+
+::: {.callout-tip title="Consider this"}
+
+Compare and contrast the two figures and describe your results: What patterns do you see?
+
+:::
+
+We can also quickly run a linear regression to determine whether our results are significantly different from a random distribution.
+
+Let's take a look at our February data set:
+
+```{r}
+
+lm(mean_monthly ~ year, data = feb) %>%
+  summary()
+
+```
+
+And now let's look at August:
+
+```{r}
+
+lm(mean_monthly ~ year, data = aug) %>%
+  summary()
+
+```
+
+::: {.callout-tip title="Consider this"}
+
+Describe your results. Discuss with your group how to interpret the p-value and R2 value.
+
+Now interpret your results and discuss what you have learned about the change in monthly discharge over time in the Piscataquog.
+
+Consider whether you think that this pattern would be stronger, weaker or the same for headwater streams.
+
+:::
+
+
+## Acknowledgements

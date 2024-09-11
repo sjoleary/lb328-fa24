@@ -1,0 +1,34 @@
+# Characterizing stream flow using images
+
+## Leveraging the power of machine learning
+
+::: {.callout-tip title="Consider this"}
+
+We have already explored the USGS gage network. You may have noticed that these are generally larger order streams that are being monitored. 
+
+Discuss difficulties of monitoring headwater streams as well as the importance of doing it anyway.
+
+:::
+
+Access the [Flow Photo Explorer](https://www.usgs.gov/apps/ecosheds/fpe/#/) and watch the overview video of the project.
+
+Armed with this background knowledge, dive into the 2022 presentation of the initial model [Towards Continuous Streamflow Monitoring with Time-Lapse Cameras and Deep Learning](https://dl.acm.org/doi/10.1145/3530190.3534805).
+
+::: {.callout-tip title="Consider this"}
+
+Summarize the goal of the project and discuss some of the difficulties and challenges that must be overcome to make this an effective method for monitoring headwater streams.
+
+:::
+
+AI is frequently referred to as a "magic bullet". Machine learning or Deep Learning Models certainly fall into this category. You will contribute to developing these models by annotating a set of photos from two of our headwater streams. As you go through this annotation process, consider how important it is to the overall process, what challenges this poses to creating effective models, and how this affects what you know (and think about) machine learning.
+
+## Explore our streams in the Photo Flow Explorer
+
+
+
+
+
+## Contribute to annotating our data set
+
+
+
