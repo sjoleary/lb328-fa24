@@ -237,7 +237,6 @@ library(tidyr)
 library(dplyr)
 library(ggplot2)
 library(patchwork)
-library(plotly)
 library(knitr)
 
 # read data set
@@ -294,6 +293,7 @@ We can plot both into the same figure if we would like. To do this we will use t
 
 ```{r}
 
+# create plots as objects
 p1 <- ggplot(precip, aes(x = date, y = prcp)) +
   geom_bar(stat = "identity", color = "darkblue") +
   labs(x = "", y = "daily total precipitation") +
@@ -549,6 +549,7 @@ avb_plot <- ggplot(avb, aes(x = date, y = mean_daily_level_cm)) +
   theme(legend.position = "bottom")
 
 ```
+
 Now we can combine them all into one plot:
 
 ```{r}
@@ -584,6 +585,7 @@ Let's read that file into `R`.
 
 ```{r}
 
+# read monthly discharge
 monthly <- read_delim("data/Piscat_monthly.txt",
                       skip = 37,
                       col_names = c("agency", "site_no", "parameter", "ts_id",
@@ -591,6 +593,7 @@ monthly <- read_delim("data/Piscat_monthly.txt",
   select(year, month, mean_monthly) %>%
   mutate(month = month(month, label = TRUE))
 
+# check data
 head(monthly) %>%
   kable()
 
@@ -600,6 +603,7 @@ Now we can plot the discharge by month.
 
 ```{r}
 
+# plot monthly discharge by month
 ggplot(monthly, aes(x = year, y = mean_monthly, color = month)) +
   stat_smooth(method = "lm", se = FALSE) +
   geom_point() +
@@ -659,6 +663,7 @@ Let's take a look at our February data set:
 
 ```{r}
 
+# linear regression
 lm(mean_monthly ~ year, data = feb) %>%
   summary()
 
@@ -668,6 +673,7 @@ And now let's look at August:
 
 ```{r}
 
+# linear regression
 lm(mean_monthly ~ year, data = aug) %>%
   summary()
 

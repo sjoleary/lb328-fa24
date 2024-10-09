@@ -1,0 +1,234 @@
+
+# Characterizing the water quality of the Piscataquog river & headwater streams
+
+```{r}
+#| label: set-up
+#| include: false
+
+# set options
+knitr::opts_chunk$set(tidy = FALSE)
+options(htmltools.dir.version = FALSE)
+
+```
+
+Let's start by making sure we have loaded our libraries.
+
+```{r}
+
+# read libraries
+library(readr)
+library(janitor)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(knitr)
+
+```
+
+## EPA Ecosystem health assessments of streams and rivers.
+
+[From 2000 - 2004 the EPA conducted the Wadeable streams Assessment](https://www.epa.gov/national-aquatic-resource-surveys/wadeable-streams-assessment)
+
+> The Wadeable Streams Assessment (WSA) is a first-ever statistically-valid survey of the biological condition of small streams throughout the U.S. EPA worked with the states to conduct the assessment in 2000-2004. 1,392 sites were selected at random to represent the condition of all streams in regions that share similar ecological characteristics. Participants used the same standardized methods at all sites, to ensure results that are comparable across the nation.
+
+You can [view the full report here](https://www.epa.gov/sites/default/files/2014-10/documents/2007_5_16_streamsurvey_wsa_assessment_may2007.pdf). It goes into a lot of detail but especially in the early sections you can see how they divided the country into different ecoregion and some of the key characteristics that distinguish them.
+
+From 2018 - 2019 the EPA conducted [the third national streams and river assessment](https://riverstreamassessment.epa.gov/webreport/#key-findings-on-2018-19-condition). This had a much broader scope in terms of the types of water bodies included.
+
+As we know getting data from state and federal agencies can be tricky. The EPA has one database [that contains the data from the various national aquatic surveys here.](https://www.epa.gov/national-aquatic-resource-surveys/data-national-aquatic-resource-surveys)
+
+## Data from the wadeable streams assessment
+
+Let's load the data from the wadeable streams assessment and determine how it is organized.
+
+```{r}
+
+# read in data set
+wadeable <- read_delim("data/epa_water-chemistry_wadeable-streams.txt",
+                       delim = "\t") %>%
+  clean_names()
+
+# look at first few rows
+head(wadeable) %>%
+  kable()
+
+```
+
+Let's take a look at Nitrogen and get a summary of the mean levels:
+
+```{r}
+
+# summarize Nitrogen by epa region
+nitrogen <- wadeable %>%
+  group_by(eparegion) %>%
+  summarize(mean_N = mean(ntl),
+            median_N = median(ntl),
+            sd_N = sd(ntl))
+
+```
+
+We can create a pretty table with that information:
+
+```{r}
+
+kable(
+  nitrogen,
+  digits = 2
+)
+
+```
+
+Alternatively we can use a boxplot to look at the distribution of observed values. To make it easier to see differences among regions we will use a logarithmic scale on the y-axis.
+
+```{r}
+
+ggplot(wadeable, aes(x = eparegion, y = ntl)) +
+  geom_boxplot() +
+  scale_y_log10() +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+::: {.callout-tip title="Give it a try"}
+
+Use your new found skills to compare the mean, meadian and standard deviation for Phosphorus. If you are feeling especially ambitious, see if you can figure out how to determine minimum and maximum values as well.
+
+Then create boxplot showing the distribution of observed total phosphorous in wadeable streams of each EPA ecoregion.
+
+Compare the different ecoregions and what you know about those areas, including the land cover to speculate what might cause some of the differences. Compare this to the information in the EPA factsheets that discuss possible sources as well as what different levels indicate about the ecosystem health.
+
+We measured nitrogen and phophorous levels in our headwater streams - how do they compare to other wadeable streams in our and other regions? What do you conclude about the ecosystem health of our headwater streams and the Piscataquog River?
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+:::
+
+In addition to the distribution of observed values of nitrogen and phosphorus, we might also want to know about the relationship of Nitrogen and Phosphorus with the MMI index that is based on the macroinvertebrates observed in those wadeable streams.
+
+::: {.callout-tip title="Consider this"}
+
+Before we look at the data, discuss with your group what you expect the relationship to look like and sketch and figure depicting your expectations.
+
+:::
+
+We are going to calculate the logarithm for both Nitrogen and Phosphorus before we plot them.
+
+```{r}
+
+nutrients <- wadeable %>%
+  mutate(log_N = log10(ntl),
+         log_P = log10(ptl))
+
+```
+
+Now we can compare Nitrogen and Phosphorous
+
+```{r}
+
+# Nitrogen
+ggplot(nutrients, aes(x = log_N, y = mmi_wsabest)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_classic()
+
+```
+
+::: {.callout-tip title="Give it a try"}
+
+Use your new found skills to plot the relationship of Phosphorus with the Macroinvertebrate index.
+
+Then describe your results and discuss them in light of your expectations and what you have learned about these metrics from the EPA fact sheets.
+
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+:::
+
+## Environmental parameters of our headwater streams
+
+We typically measure temperature, pH, dissolved oxygen, conductivity, TDS (total dissolved sediment) when we visit our headwater monitoring sites.
+
+Let's read in data from the past few years. 
+
+```{r}
+
+# read data
+headwaters <- read_delim("data/environmental-param.tsv",
+                         delim = "\t") %>%
+  clean_names()
+
+# check data
+head(headwaters)
+
+```
+
+We most typically visit in the summer, early fall and late spring and in some years sites were visited more regularly than others. You'll also notice that there is some missing data - this can be the result of equipment not working as expected or change in the instrumentation but for our intents in purposes we should be okay.
+
+Let's take a look at the distribution of TDS for each site. First let's calculate the mean and standard deviation^[Because we have some locations with missing data, we will need to add an argument to the equation that explicitely tells `R` to ignore those missing values.]:
+
+```{r}
+
+headwaters %>%
+  group_by(stream_name) %>%
+  summarize(mean_TDS = mean(tds_ppm, na.rm = TRUE),
+            sd_TDS = sd(tds_ppm, na.rm = TRUE)) %>%
+  arrange(desc(mean_TDS)) %>%
+  kable(digits = 2)
+
+```
+
+Now let's compare the distribution using boxplots to get a better idea of the distribution of observed values across different visits.
+
+In addition to the boxes, we are going to plot the individual points - this is helpful because some of our sites have a lot more observations compared to others, so it is a more honest depiction of our results. Instead of using `geom_point()` we will use `geom_jitter()` which means that points are randomly "jittered" on the x-axis so they are more easy to distinguish.
+
+```{r}
+
+ggplot(headwaters, aes(x = stream_name, y = tds_ppm)) +
+  geom_boxplot(outlier.shape = NULL) +
+  geom_jitter() +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+::: {.callout-tip title="Give it a try"}
+
+Use your new found skills to calculate the mean and standard deviation for other parameters as well as their distributions.
+
+Describe your results and discuss them in the context of what you have learned from the EPA factsheets.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+:::
+
+## Data from streams and rivers assessment 2019
+
+
+```{r}
+
+# read data
+rivers <- read_delim("data/epa_water-chemistry_streams-rivers_2019.csv",
+                     delim = ",") %>%
+  clean_names()
+
+# column names
+colnames(rivers)
+
+```
+
+::: {.callout-tip title="Give it a try"}
+
+Take a look at the information that is contained within this assessment and discuss with your group which ones you think will be the most beneficial to compare to get context to compare our headwater streams to other streams in our ecoregion as well as other ecoregions in general.
+
+:::
+
+

@@ -14,6 +14,7 @@ book:
       chapters:
         - A01_watersheds.qmd
         - A02_USGSgages.qmd
+        - A03_water-quality.qmd
         
     - part: B_stream-health-macroinverts.qmd
 #      chapters:
