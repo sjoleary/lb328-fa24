@@ -1,0 +1,182 @@
+
+# Comparison of macroinverbrate biodiversity
+
+```{r}
+#| label: set-up
+#| include: false
+
+# set options
+knitr::opts_chunk$set(tidy = FALSE)
+options(htmltools.dir.version = FALSE)
+
+```
+
+Now that we've generated all this data we can use it to address our first research objective.
+
+**Compare species richness and diversity for selected headwater streams across spring, summer, and fall.**
+
+Keep in mind that we have data sets from two locations (Rand Brook and Schoolhouse Brook) for three different sampling seasons from multiple years.
+
+* Summer: July 9th - Aug 6th
+* Fall: October 3rd - 31st
+* Spring April 11th - May 9th
+
+You can download the data sets from our shared google folder.
+
+## Get set up
+
+Before we can get started let's load our packages.
+
+```{r}
+
+# read libraries
+library(readr)
+library(janitor)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(glue)
+library(ggplot2)
+library(patchwork)
+library(knitr)
+
+```
+
+Now, we can read in our data sets.
+
+```{r}
+
+rand_2210 <- read_delim("data/macros_RAND_2022-10-19.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2305 <- read_delim("data/macros_RAND_2023-05-30.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2307 <- read_delim("data/macros_RAND_2023-07-07.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2310 <- read_delim("data/macros_RAND_2023-10-18.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2407 <- read_delim("data/macros_RAND_2024-07-09.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2410 <- read_delim("data/macros_RAND_2024-10-02.tsv", delim = "\t") %>%
+  clean_names()
+
+schb_2210 <- read_delim("data/macros_SCHB_2022-11-02.tsv", delim = "\t") %>%
+  clean_names()
+
+schb_2305 <- read_delim("data/macros_SCHB_2023-05-30.tsv", delim = "\t") %>%
+  clean_names()
+
+schb_2410 <- read_delim("data/macros_SCHB_2024-10-23.tsv", delim = "\t") %>%
+  clean_names()
+
+```
+
+
+First, we will want to look at the number of individuals in each taxonomic group and calculate their relative abundances and compare species richness and diversity across the two locations.
+
+Let's start with the data set from our visit to rand brook this semester.
+
+We can figure out the richness by determining the number of individuals in each of the different orders and family.
+
+```{r}
+
+kable(
+  rand_2410 %>%
+    group_by( order) %>%
+    count()
+)
+
+```
+
+This is helpful but our sample sizes differ among locations so we will want to determine the relative abundance for each location.
+
+We can do this by dividing the number of individuals in a certain group by the total number of individuals sampled at that location.
+
+```{r}
+
+kable(
+  rand_2410 %>%
+    group_by(order) %>%
+    count() %>%
+    ungroup() %>%
+    mutate(rel_abund = round(n/sum(n)*100, digits = 1))
+)
+
+```
+
+::: {.callout-tip title="Consider this"}
+
+Use your new found skills to calculate richness and relative abundances for all our data sets by order and family and briefly describe your results.
+
+Recall, that you will want to start by stating the general trends and patterns first in a way that somebody who does not necessarily have your tables in front of them has a good idea of what is being compared and what the major pattern is. Then point out notable highlights.
+
+Look at each data set separately to identify patterns and then start making comparisons within and among sites.
+
+* are there dominant species? is there an even distribution? in both locations? only one?
+* are all taxonomic groups in both locations? how much overlap is there? does this differ depending on the taxonomic resolution you are looking at?
+* are there seasonabl patterns? in one location? in both locations?
+* are there notable differences among locations? e.g. taxonomic group occurs in both locations but is really common in one location and more rare in another.
+
+Your answer should be 5-7 sentences.
+
+:::
+
+
+::: {.callout-tip title="Consider this"}
+
+Other than a massive table with all the results, is there a good way to visualize this data set?
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+We could create a heatplot that shows all the sample sets and color codes the tiles according to relative abundance.
+
+First, we need to combine all of our data sets into a single one.
+
+```{r}
+
+macros <- bind_rows(rand_2210,
+                    rand_2305,
+                    rand_2307,
+                    rand_2310,
+                    rand_2407,
+                    rand_2410,
+                    schb_2210,
+                    schb_2305,
+                    schb_2410) %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date),
+         sample_bout = glue("{site_id}_{year}-{month}")) %>%
+  group_by(sample_bout, order) %>%
+    count() %>%
+    ungroup() %>%
+    group_by(sample_bout) %>%
+    mutate(rel_abund = round(n/sum(n)*100, digits = 1)) %>%
+   separate(sample_bout, into = c("site_id", "year", "month"), remove = FALSE)
+
+```
+
+Now we can create a heatplot for relative abundance by order:
+
+```{r}
+
+ggplot(macros, aes(x = sample_bout, y = order, fill = rel_abund)) +
+  geom_tile() +
+  scale_fill_viridis_c(option = "E", direction = -1) +
+  facet_grid(. ~ site_id, scales = "free", space = "free") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "bottom")
+
+
+```
+
+Now  you can make the same figure by family.
+
+:::
+

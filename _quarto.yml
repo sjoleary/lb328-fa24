@@ -17,8 +17,10 @@ book:
         - A03_water-quality.qmd
         
     - part: B_stream-health-macroinverts.qmd
-#      chapters:
-#        - B01.qmd
+      chapters:
+        - B01_bioindicators.qmd
+        - B02_macro-diversity.qmd
+        - B03_macro-indices.qmd
 
         
     - part: C_brook-trout.qmd

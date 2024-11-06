@@ -1470,8 +1470,8 @@ function fuseSearch(query, fuse, fuseOptions) {
 }
 </script>
 <meta name="quarto:offset" content="./">
-<link href="./C_brook-trout.html" rel="next">
-<link href="./A02_USGSgages.html" rel="prev">
+<link href="./B01_bioindicators.html" rel="next">
+<link href="./A03_water-quality.html" rel="prev">
 <script>const sectionChanged = new CustomEvent("quarto-sectionChanged", {
   detail: {},
   bubbles: true,
@@ -4444,7 +4444,7 @@ vertical-align: -.125em;
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -4505,11 +4505,42 @@ vertical-align: -.125em;
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Characterizing the hydrological regime of the Piscataquog river &amp; headwater streams</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A03_water-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Characterizing the water quality of the Piscataquog river &amp; headwater streams</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Exploring macroinvertebrate biodiversity of headwater streams</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="./B_stream-health-macroinverts.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exploring macroinvertebrate biodiversity of headwater streams</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./B01_bioindicators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Macroinvertebrate sampling to determine stream health</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./B02_macro-diversity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Comparison of macroinverbrate biodiversity</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./B03_macro-indices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparison of macroinvertebrate indices</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -4527,7 +4558,7 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./D01_intro-R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></span></a>
   </div>
 </li>
       </ul>
@@ -4541,7 +4572,7 @@ vertical-align: -.125em;
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -4559,6 +4590,24 @@ vertical-align: -.125em;
   
 
 </header>
+
+<div class="page-columns page-full"><p>For each of our units you will create a project folder that will contain an <code>Rproject</code> along with data, scripts, and other forms of documentation as we explore that topic, it will function as a digital lab notebook. At the beginning of the semester, you should have created a directory on your Desktop or Documents folder names <code>lb328</code> as a home directory<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for all of our projects this semester.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;We will use directory and folder synonymously throughout this lab notebook</p></li></div></div>
+<p>Go ahead and create a subfolder called <code>02_macroinverts</code>, with folders called <code>data</code>, <code>results</code>, <code>scr</code>, and <code>reports</code> to hold various files you will access and create for this unit.</p>
+<p>You will be able to download data sets and edit spreadsheets as we gather data from a <a href="">shared google folder here</a>.</p>
+<p>In this second unit, we will visit two of our headwater streams and collect macroinvertebrates, we will then determine which taxonomic groups they belong to (order and family), and use that information to assess and compare the ecosystem health of Rand Brook and Schoolhouse brook.</p>
+<p>The research objectives for this component of our headwater monitoring project is to</p>
+<ol type="1">
+<li>Compare species richness and diversity for selected headwater streams across spring, summer, and fall.</li>
+<li>Compare stream habitat quality for selected headwater streams across spring, summer, and fall based on macroinvertebrate as bioindicators indices.</li>
+</ol>
+<p><strong>Learning Objectives</strong></p>
+<p>After completing this activity you should be able to</p>
+<ul>
+<li>Use a dichotomous key and visual cues to identify aquatic macroinvertebrates to the level of order and family.</li>
+<li>Define what a bioindicator species is and describe the key characteristics for good bioindicators.</li>
+<li>Outline how macroinvertebrates are used for biomonitoring of ecosystem health.</li>
+<li>Explain how to calculate two commonly used macroinvertebrate bioindices used to assess stream health and apply them to a data set.</li>
+</ul>
 
 
 
@@ -4799,13 +4848,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./A02_USGSgages.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Characterizing the hydrological regime of the Piscataquog river &amp; headwater streams</span></span>
+      <a href="./A03_water-quality.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Characterizing the water quality of the Piscataquog river &amp; headwater streams</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./C_brook-trout.html" class="pagination-link">
-        <span class="nav-page-text">Exploring brook trout habitat</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./B01_bioindicators.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Macroinvertebrate sampling to determine stream health</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

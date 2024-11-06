@@ -1,0 +1,98 @@
+
+# Macroinvertebrate sampling to determine stream health
+
+```{r}
+#| label: set-up
+#| include: false
+
+# set options
+knitr::opts_chunk$set(tidy = FALSE)
+options(htmltools.dir.version = FALSE)
+
+```
+
+
+## Ecological indicators and bioindicators.
+
+::: {.callout-tip title="Consider this"}
+
+In our discussion of the strategic value of species diversity, we briefly touched on the concept of indicator species. Briefly outline what an indicator species is and how it differs from a flagship and an umbrella species (which are both classified as surrogate species), two groups that also carry significant strategic value for conservation efforts. Use specific examples as needed and consider whether a species could fall into all three categories.
+
+:::
+
+**Ecological indicators** are used as proxies to identify and communicate the impact of human activities on ecosystem to policy-makers. Effective indicators share certain characteristics that allow us to monitor change.
+
+Overall they must be …
+
+1. sensitive enough to detect important changes but not too sensitive to avoid picking up natural variation. This means they need to be able to detect changes at the appropriate temporal & spatial scale without being overwhelmed by variability.
+2. based on well understood & generally accepted conceptual models of the system to which they are applied.
+3. based on reliable data that is available to assess trends/collected in straightforward process and for which monitoring systems are in place.
+4. easily understood by policy-makers.
+
+**Bioindicators** are a subset of ecological indicators. Here, species assemblage and population abundance are used to measure ecosystem health and habitat quality. Frequently, they are used as a proxy for environmental contamination and pollution. 
+
+Aquatic invertebrates are frequently used as bioindicators to assess the level of pollution of streams or other freshwater habitats due to their varying degree of sensitivity to a polluted environment along with further characteristics.
+
+* they spend up to one year in the stream (long life cycle reflects water quality of time period)
+* little mobility (indicate localized conditions)
+* generally abundant
+* easy sampling/identification of major taxonomic groups
+* differential sensitivity among taxonomic groups to sedimentation, habitat loss, chemical pollution due to different tolerance ranges for physical and chemical parameters.
+
+::: {.callout-tip title="Consider this"}
+
+Based on these characteristics, argue whether you think aquatic invertebrates could be an effective ecological indicator. Your answer should explicitly state which ecosystem(s) they could be applied to and what change in the ecosystem they could be used to monitor and how they fit the four general characteristics of good ecological indicators. 
+
+*Your answer should be 7-10 sentences.*
+
+:::
+
+::: {.callout-tip title="Consider this"}
+
+Discuss the benefits and drawbacks of using macroinvertebrates/bioindicators compare to measuring physical and chemical parameters directly. 
+
+*Your answer should be 5-7 sentences.*
+
+:::
+
+
+
+## Macroinvertebrates
+
+Macroinvertebrates (or "macros" for short) are animals without a backbone (invertebrates) that are large enough to be seen with the naked eye (hence, macro).
+
+Macroinvertebrates are in large part comprised of aquatic insects (e.g. mayflies, stone flies, caddisflies, midges, beetles) but also include non-insect orders and classes such as snails, works, some freshwater clams and mussels, as well as crayfish.
+
+Most of the macroinvertebrates that we sampled are aquatic insects which have complex life cycles with some development stages being completed in the water while the adults generally live on land.
+
+* Dobsonflies, Caddisflies, and beetles are taxonomic groups with complete metamorphosis that complete four stages of development: egg, larva, pupa, and adult.
+* Dragonflies, mayflies, and stoneflies are taxonomic groups with incomplete metamorphosis with three stages of development: egg, nymph, and adult.
+
+::: {.callout-tip title="Consider this"}
+
+Explain which developmental stages you do and do not expect to have in our samples.
+
+:::
+
+Macroinvertebrates play an important role in food webs as secondary consumers as they link primary producers (algae) to the higher trophic levels. They also play a role in shredding and eating decaying leaf litter thus assisting in the decomposition process that makes nutrients available to primary producers.
+
+
+## Field sampling and macorinvertebrate identification
+
+We are targeting three sampling bouts a year based on the sample period for nearest aquatic NEON site (Hop Brook, HOPB which is in NH):
+
+* Summer: July 9th - Aug 6th
+* Fall: October 3rd - 31st
+* Spring April 11th - May 9th
+
+
+We sampled two local headwater streams and used several methods including kicks, sweeps, and visual walk-throughs to collect a representative sample of macroinvertebrates for each location. We picked them in the field^[The other option is to just preserve all the material collected in the nets in ethanol and pick out the specimen from the leaf debris and other plant material in the lab] and preserved them in 70 - 90% EthOH.
+
+Work with a lab buddy using the following resources to identify the macroinvertebrates we collected for each location to at least order and family.
+
+* [macroinvertebrates.org](https://www.macroinvertebrates.org/key/) or PocketMacro the accompanying app.
+* [Digital dichotomous key](http://cfb.unh.edu/StreamKey/html/begin.html)
+
+Enter each specimen you identify in the appropriate google spreadsheet. Then sort the identified macros into falcon tubes with Ethanol labeled with sample location and date as well as order and family. 
+
+You can look up the tolerance level for each family in [this table](http://lakes.chebucto.org/ZOOBENTH/BENTHOS/tolerance.html#family) or using [macroinvertebrates.org](https://www.macroinvertebrates.org/key/). Similarly, you can learn about the different functional feeding groups using these resources.

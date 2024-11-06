@@ -1,0 +1,114 @@
+order,family,feeding_habit,tolerance
+Ephemeroptera,Ameletidae,c-g,0
+Ephemeroptera,Baetidae,c-g/scr,5
+Ephemeroptera,Baetiscidae,c-g,4
+Ephemeroptera,Caenidae,c-g,6
+Ephemeroptera,Ephemerellidae,c-g/scr,1
+Ephemeroptera,Ephemeridae,c-g,3
+Ephemeroptera,Heptageniidae,scr,3
+Ephemeroptera,Isonychiidae,c-f,2
+Ephemeroptera,Leptophlebiidae,c-g,3
+Ephemeroptera,Leptohyphidae,c-g,4
+Ephemeroptera,Metretopodidae,,2
+Ephemeroptera,Oligoneuriidae,,2
+Ephemeroptera,Polymitarcyidae,c-g,2
+Ephemeroptera,Potomanthidae,c-g,4
+Ephemeroptera,Siphlonuridae,c-g,4
+Ephemeroptera,Tricorythidae,,4
+Odonata,Aeshnidae,prd,3
+Odonata,Calopterygidae,prd,6
+Odonata,Coenagrionidae,prd,8
+Odonata,Cordulegastridae,prd,3
+Odonata,Corduliidae,prd,2
+Odonata,Gomphidae,prd,3
+Odonata,Lestidae,prd,6
+Odonata,Libellulidae,prd,2
+Odonata,Macromiidae,prd,2
+Plecoptera,Capniidae,shr,2
+Plecoptera,Chloroperlidae,prd/c-g,0
+Plecoptera,Leuctridae,shr,0
+Plecoptera,Nemouridae,shr,2
+Plecoptera,Peltoperlidae,shr,0
+Plecoptera,Perlidae,prd,2
+Plecoptera,Perlodidae,prd,2
+Plecoptera,Pteronarcyidae,shr,0
+Plecoptera,Taeniopterygidae,shr,2
+Hemiptera,Corixidae,prd,5
+Trichoptera,Apataniidae,scr,3
+Trichoptera,Brachycentridae,shr/c-f,1
+Trichoptera,Calamoceratidae,,3
+Trichoptera,Dipseudopsidae,c-f,5
+Trichoptera,Glossosomatidae,scr,1
+Trichoptera,Goeridae,scr,3
+Trichoptera,Helicopsychidae,scr,3
+Trichoptera,Hydropsychidae,c-f,4
+Trichoptera,Hydroptilidae,scr/shr/c-g,4
+Trichoptera,Lepidostomatidae,shr,1
+Trichoptera,Leptoceridae,c-g/shr/prd,4
+Trichoptera,Limnephilidae,shr/scr/c-g,3
+Trichoptera,Molannidae,scr,6
+Trichoptera,Odontoceridae,scr,0
+Trichoptera,Philopotamidae,c-f,3
+Trichoptera,Phryganeidae,shr/prd,4
+Trichoptera,Polycentropodidae,c-f/prd,6
+Trichoptera,Psychomyiidae,c-g/scr,2
+Trichoptera,Rhyacophilidae,prd,1
+Trichoptera,Sericostomatidae,,3
+Trichoptera,Uenoidae,scr,3
+Lepidoptera,Arctiidae,shr,5
+Lepidoptera,Nepticulidae,shr,5
+Lepidoptera,Pyralidae,shr/scr,5
+Coleoptera,Curculionidae,shr,5
+Coleoptera,Dryopidae,scr,5
+Coleoptera,Dytiscidae,prd,5
+Coleoptera,Elmidae,scr/c-g,4
+Coleoptera,Gyrinidae,prd,4
+Coleoptera,Haliplidae,shr,5
+Coleoptera,Hydrophilidae,c-g/prd/shr,5
+Coleoptera,Psephenidae,scr,4
+Coleoptera,Ptilodactylidae,shr,3
+Coleoptera,Scirtidae,scr,5
+Megaloptera,Corydalidae,prd,4
+Megaloptera,Sialidae,prd,4
+Neuroptera,Climacia,prd,5
+Diptera,Anthomyiidae (root maggot flies),prd,6
+Diptera,Athericidae,prd,4
+Diptera,Blephariceridae (net-winged midges),scr,0
+Diptera,Ceratopogonidae (biting midges or no-see-ums),prd,6
+Diptera,Chaoboridae (phantom midges),prd,8
+Diptera,Chironomidae,c-g/prd/shr/c-f/scr,8
+Diptera,Culicidae (mosquitoes),c-f,8
+Diptera,Dolichopodidae,prd,4
+Diptera,Dixidae (dixid midges),c-f,1
+Diptera,Dolochopodidae,,4
+Diptera,Empididae (dance flies),prd,6
+Diptera,Ephydridae,shr,6
+Diptera,Muscidae,prd,6
+Diptera,Psychodidae (moth flies),c-g,8
+Diptera,Ptychopteridae,c-g,9
+Diptera,Scathophagidae (dung flies),shr,6
+Diptera,Simuliidae,c-f,6
+Diptera,Stratiomyidae,c-g,7
+Diptera,Syrphidae,,10
+Diptera,Tabanidae (horse and deer flies),c-g/prd,5
+Diptera,Tanyderidae,c-g,3
+Diptera,Tipulidae,c-g/prd/shr,3
+Acariformes,Arrenuridae,prd,6
+Acariformes,Lebertiidae,prd,6
+Acariformes,Atractideidae,prd,6
+Acariformes,Mideopsidae,prd,6
+Acariformes,Tyrellidae,prd,6
+Acariformes,Limnesidae,prd,6
+Acariformes,Limnocharidae,prd,6
+Acariformes,Sperchonidae,prd,6
+Acariformes,Unionicolidae,prd,6
+Isopoda,Anthuridae,c-g,5
+Isopoda,Idoteidae,c-g,5
+Isopoda,Asellidae,c-g,8
+Amphipoda,Crangonyctidae,c-g,6
+Amphipoda,Gammaridae,c-g,6
+Amphipoda,Oedicerotidae,c-g,5
+Amphipoda,Talitridae/Hyalellidae,c-g,8
+Cumacea,,c-g,5
+Decapoda,,c-g,6
+Cladocera,,c-f,8

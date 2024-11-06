@@ -1,0 +1,200 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Comparison of macroinvertebrate indices
+
+```{r}
+#| label: set-up
+#| include: false
+
+# set options
+knitr::opts_chunk$set(tidy = FALSE)
+options(htmltools.dir.version = FALSE)
+
+```
+
+We can analyze this same data set with our second research objective in mind:
+
+**Compare stream habitat quality for selected headwater streams across spring, summer, and fall based on macroinvertebrate as bioindicators indices.**
+
+We are going to use to **bioindices** to assess stream health. An index is a measure that allows us to track overall trends of something - in this case stream health. It is a way to take something very complex like stream health which is comprised of physical, biological, and chemical aspects and compare them with one easily to estimate metric. Instead of measuring each individual parameter individually we are assessing the compounding impacts on a component of the biological community. We can do this because different taxonomic groups have different tolerance levels to survive under stressful conditions. Here, we will use tolerance values assigned to an entire taxonomic group (order or family), however, we should keep in mind that the tolerance of species within that group might vary.
+
+The first first index is the **EPT index**. Three major orders with low tolerance to pollution are **E**phemeroptera (mayflies), **P**lectoptera (stoneflies), **T**hrichoptera (caddisflies) are sensitive to pollutants in their environment. In short, the EPT index quantifies the percentage of sensitive taxa to total taxa found.
+
+Let's load our samples and creat the combined data set:
+
+```{r}
+
+# read libraries
+library(readr)
+library(janitor)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(glue)
+library(ggplot2)
+library(patchwork)
+library(knitr)
+
+rand_2210 <- read_delim("data/macros_RAND_2022-10-19.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2305 <- read_delim("data/macros_RAND_2023-05-30.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2307 <- read_delim("data/macros_RAND_2023-07-07.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2310 <- read_delim("data/macros_RAND_2023-10-18.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2407 <- read_delim("data/macros_RAND_2024-07-09.tsv", delim = "\t") %>%
+  clean_names()
+
+rand_2410 <- read_delim("data/macros_RAND_2024-10-02.tsv", delim = "\t") %>%
+  clean_names()
+
+schb_2210 <- read_delim("data/macros_SCHB_2022-11-02.tsv", delim = "\t") %>%
+  clean_names()
+
+schb_2305 <- read_delim("data/macros_SCHB_2023-05-30.tsv", delim = "\t") %>%
+  clean_names()
+
+schb_2410 <- read_delim("data/macros_SCHB_2024-10-23.tsv", delim = "\t") %>%
+  clean_names()
+
+macros <- bind_rows(rand_2210,
+                    rand_2305,
+                    rand_2307,
+                    rand_2310,
+                    rand_2407,
+                    rand_2410,
+                    schb_2210,
+                    schb_2305,
+                    schb_2410)
+
+```
+
+::: {.callout-tip title="Consider this"}
+
+Explain whether a higher or lower EPT index is indicative of better stream health
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+
+
+:::
+
+Let's calculate the EPT index for each stream by determining the total number of EPT individuals and dividing that number by the total number of individuals in the data set. We are going to use `mutate()` to add a new column that will classify specimen as EPT taxa or non-EPT taxa, then we can calculate the relative abundance.
+
+```{r}
+
+kable( 
+macros %>%
+  mutate(EPT = ifelse(order %in% c("Ephemeroptera", "Plecoptera", "Trichoptera"), "EPT", "non-EPT")) %>%
+  group_by(site_id, sample_date, EPT) %>%
+  count() %>%
+  ungroup() %>%
+  group_by(site_id, sample_date) %>%
+  mutate(EPT_index = n/(sum(n))) %>%
+  filter(EPT == "EPT"),
+digits = 3
+)
+
+```
+
+::: {.callout-tip title="Consider this"}
+
+
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+Describe your results. Consider differences within and among samples
+
+Recall, that you will want to start by stating the general trends and patterns first in a way that somebody who does not necessarily have your tables in front of them has a good idea of what is being compared and what the major pattern is. Then point out notable highlights. Make sure you are specific. Higher and lower are qualitative descriptions but there is a big difference if the EPT index is higher in one location by 1% or 10%!
+
+Your answer should be 2-3 sentences.
+
+:::
+
+
+The second Index we will use is the **Hilsenhoff Biotic Index**. It functions the same way as the EPT index where we distinguish between different tolerance levels for different taxonomic groups and then estimate the overall tolerance of the community weighted by the relative abundance of each group.
+
+* taxonomic groups are assigned a number from 0 - 10 pertaining to known sensitivity to organic pollutants (0 most sensitive, 10 most tolerant)
+* the number of individuals per group is multiplied by the tolerance number for that group.
+* the sum of all group tolerance values is divided by the total number of specimen in that sample.
+
+Different ranges of the HBI value are indicative of stream health:
+
+* Excellent (0 - 3.75): organic pollution unlikely
+* Very Good (3.76 - 4.25): possible slight organic pollution
+* Good (4.26 - 5): some organic pollution probable
+* Fail (5 - 5.75): fairly substantial pollution likely
+* Fairly Poor (5.76 - 6.50): substantial pollution likely
+* Poor (6.51 - 7.25): very very substantial pollution likely
+* Very Poor (7.26 - 10): severe organic pollution likely
+
+First, we will need to pull in a data set that contains the tolerance levels for each family. Keep in mind, that even within families there are going to be differences in terms of tolerance.
+
+```{r}
+
+tolerance <- read_delim("data/macros_family-tolerance.csv", delim = ",")
+
+```
+
+These are from [this table](http://lakes.chebucto.org/ZOOBENTH/BENTHOS/tolerance.html#family) - we might need to update the information based on on macroinvertebrates.org
+
+Now we can join those two data frames and calculate the weighted average.
+
+```{r}
+
+kable(
+  macros %>%
+    left_join(tolerance) %>%
+    filter(!is.na(tolerance)) %>%
+    group_by(site_id, sample_date, family, tolerance) %>%
+    count() %>%
+    mutate(weighted_abund = n*tolerance) %>%
+    ungroup() %>%
+    group_by(site_id, sample_date) %>%
+    summarize(HSI = sum(weighted_abund)/sum(n)),
+  digits = 2)
+
+```
+
+::: {.callout-tip title="Consider this"}
+
+Describe your results.
+
+Recall, that you will want to start by stating the general trends and patterns first in a way that somebody who does not necessarily have your tables in front of them has a good idea of what is being compared and what the major pattern is. Then point out notable highlights. Make sure you are specific. Higher and lower are qualitative descriptions but there is a big difference if the EPT index is higher in one location by 1% or 10%!
+
+Your answer should be 2-3 sentences.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+
+
+:::
+
+::: {.callout-tip title="Consider this"}
+
+Interpret and discuss your results (species composition, bioindices) in an assessment of the stream health of our two headwater streams.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+Start your discussion with one sentence summarizing what you did and why. For example, "Here, we collected a representative sample of macroinvertebrates from two headwater streams to ..." and summarize your key results in 2-3 sentences; make sure to highlight if anything was unexpected between the different analysis (species composition, EPT index, HSI) or if they all point toward the same thing. Then interpret what that means in terms of stream health. Consider expected differences, e.g. Schoolhouse Brook is a first order stream, Rand Brook is a second order stream, i.e. other streams flow into it and difference sample times or if you found unexpected differences what that means, for example these locations are very close to each other. From having observed the habitat, did you expect high or low stream health? Why? Explain why you think you got the results that you did.
+
+Your answer should be 8-12 sentences.
+
+:::
