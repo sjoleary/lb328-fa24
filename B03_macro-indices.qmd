@@ -18,13 +18,18 @@ options(htmltools.dir.version = FALSE)
 
 We can analyze this same data set with our second research objective in mind:
 
+::: {.callout-note icon=false}
+
+## Research Objective 1:
+
 **Compare stream habitat quality for selected headwater streams across spring, summer, and fall based on macroinvertebrate as bioindicators indices.**
+
+:::
 
 We are going to use to **bioindices** to assess stream health. An index is a measure that allows us to track overall trends of something - in this case stream health. It is a way to take something very complex like stream health which is comprised of physical, biological, and chemical aspects and compare them with one easily to estimate metric. Instead of measuring each individual parameter individually we are assessing the compounding impacts on a component of the biological community. We can do this because different taxonomic groups have different tolerance levels to survive under stressful conditions. Here, we will use tolerance values assigned to an entire taxonomic group (order or family), however, we should keep in mind that the tolerance of species within that group might vary.
 
-The first first index is the **EPT index**. Three major orders with low tolerance to pollution are **E**phemeroptera (mayflies), **P**lectoptera (stoneflies), **T**hrichoptera (caddisflies) are sensitive to pollutants in their environment. In short, the EPT index quantifies the percentage of sensitive taxa to total taxa found.
 
-Let's load our samples and creat the combined data set:
+Let's load our samples and create the combined data set:
 
 ```{r}
 
@@ -78,6 +83,11 @@ macros <- bind_rows(rand_2210,
 
 ```
 
+### EPT index
+The first first index is the **EPT index**. Three major orders with low tolerance to pollution are **E**phemeroptera (mayflies), **P**lectoptera (stoneflies), **T**hrichoptera (caddisflies) are sensitive to pollutants in their environment. 
+
+In short, the **EPT index quantifies the percentage of sensitive orders to total orders found**.
+
 ::: {.callout-tip title="Consider this"}
 
 Explain whether a higher or lower EPT index is indicative of better stream health
@@ -86,11 +96,13 @@ Explain whether a higher or lower EPT index is indicative of better stream healt
 
 ::: {.callout-note title="Answer" collapse="true"}
 
-
+A higher EPT value indicates that a larger proportion of your sample is comprised of the three sensitive orders.
 
 :::
 
-Let's calculate the EPT index for each stream by determining the total number of EPT individuals and dividing that number by the total number of individuals in the data set. We are going to use `mutate()` to add a new column that will classify specimen as EPT taxa or non-EPT taxa, then we can calculate the relative abundance.
+Let's calculate the EPT index for each stream by determining the total number of EPT individuals and dividing that number by the total number of individuals in the data set. 
+
+We are going to use `mutate()` to add a new column that will classify specimen as EPT taxa or non-EPT taxa, then we can calculate the relative abundance.
 
 ```{r}
 
@@ -110,22 +122,22 @@ digits = 3
 
 ::: {.callout-tip title="Consider this"}
 
-
-
-:::
-
-::: {.callout-note title="Answer" collapse="true"}
-
 Describe your results. Consider differences within and among samples
 
-Recall, that you will want to start by stating the general trends and patterns first in a way that somebody who does not necessarily have your tables in front of them has a good idea of what is being compared and what the major pattern is. Then point out notable highlights. Make sure you are specific. Higher and lower are qualitative descriptions but there is a big difference if the EPT index is higher in one location by 1% or 10%!
+As always start by stating the general trends and patterns first in a way that somebody who does not necessarily have your tables in front of them has a good idea of what is being compared and what the major pattern is. Then point out notable highlights. Make sure you are specific. 
 
-Your answer should be 2-3 sentences.
+Higher and lower are qualitative descriptions but there is a big difference if the EPT index is higher in one location by 1% or 10%!
+
+*Your answer should be 2-3 sentences.*
+
 
 :::
 
+### Hilsenhoff Biotic Index
 
-The second Index we will use is the **Hilsenhoff Biotic Index**. It functions the same way as the EPT index where we distinguish between different tolerance levels for different taxonomic groups and then estimate the overall tolerance of the community weighted by the relative abundance of each group.
+The second Index we will use is the **Hilsenhoff Biotic Index**. 
+
+It functions the same way as the EPT index where we distinguish between different tolerance levels for different taxonomic groups and then estimate the overall tolerance of the community weighted by the relative abundance of each group.
 
 * taxonomic groups are assigned a number from 0 - 10 pertaining to known sensitivity to organic pollutants (0 most sensitive, 10 most tolerant)
 * the number of individuals per group is multiplied by the tolerance number for that group.
@@ -141,15 +153,13 @@ Different ranges of the HBI value are indicative of stream health:
 * Poor (6.51 - 7.25): very very substantial pollution likely
 * Very Poor (7.26 - 10): severe organic pollution likely
 
-First, we will need to pull in a data set that contains the tolerance levels for each family. Keep in mind, that even within families there are going to be differences in terms of tolerance.
+First, we will need to pull in a data set that contains the tolerance levels for each family. Keep in mind, that even within families there are going to be differences in terms of tolerance^[These are from [this table](http://lakes.chebucto.org/ZOOBENTH/BENTHOS/tolerance.html#family), you will see that for some of the families in our data set we do not have tolerance values, we might need to update the information based on on macroinvertebrates.org.].
 
 ```{r}
 
 tolerance <- read_delim("data/macros_family-tolerance.csv", delim = ",")
 
 ```
-
-These are from [this table](http://lakes.chebucto.org/ZOOBENTH/BENTHOS/tolerance.html#family) - we might need to update the information based on on macroinvertebrates.org
 
 Now we can join those two data frames and calculate the weighted average.
 
@@ -175,15 +185,10 @@ Describe your results.
 
 Recall, that you will want to start by stating the general trends and patterns first in a way that somebody who does not necessarily have your tables in front of them has a good idea of what is being compared and what the major pattern is. Then point out notable highlights. Make sure you are specific. Higher and lower are qualitative descriptions but there is a big difference if the EPT index is higher in one location by 1% or 10%!
 
-Your answer should be 2-3 sentences.
+*Your answer should be 2-3 sentences.*
 
 :::
 
-::: {.callout-note title="Answer" collapse="true"}
-
-
-
-:::
 
 ::: {.callout-tip title="Consider this"}
 
@@ -193,8 +198,10 @@ Interpret and discuss your results (species composition, bioindices) in an asses
 
 ::: {.callout-note title="Answer" collapse="true"}
 
-Start your discussion with one sentence summarizing what you did and why. For example, "Here, we collected a representative sample of macroinvertebrates from two headwater streams to ..." and summarize your key results in 2-3 sentences; make sure to highlight if anything was unexpected between the different analysis (species composition, EPT index, HSI) or if they all point toward the same thing. Then interpret what that means in terms of stream health. Consider expected differences, e.g. Schoolhouse Brook is a first order stream, Rand Brook is a second order stream, i.e. other streams flow into it and difference sample times or if you found unexpected differences what that means, for example these locations are very close to each other. From having observed the habitat, did you expect high or low stream health? Why? Explain why you think you got the results that you did.
+Start your discussion with one sentence summarizing what you did and why. For example, "Here, we collected a representative sample of macroinvertebrates from two headwater streams to ..." and summarize your key results in 2-3 sentences; make sure to highlight if anything was unexpected between the different analysis (species composition, EPT index, HSI) or if they all point toward the same thing. 
 
-Your answer should be 8-12 sentences.
+Then interpret what that means in terms of stream health. Consider expected differences, e.g. Schoolhouse Brook is a first order stream, Rand Brook is a second order stream, i.e. other streams flow into it and difference sample times or if you found unexpected differences what that means, for example these locations are very close to each other. From having observed the habitat, did you expect high or low stream health? Why? Explain why you think you got the results that you did.
+
+*Your answer should be 250 - 500 words.*
 
 :::

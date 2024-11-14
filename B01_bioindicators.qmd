@@ -16,7 +16,7 @@ options(htmltools.dir.version = FALSE)
 
 ::: {.callout-tip title="Consider this"}
 
-In our discussion of the strategic value of species diversity, we briefly touched on the concept of indicator species. Briefly outline what an indicator species is and how it differs from a flagship and an umbrella species (which are both classified as surrogate species), two groups that also carry significant strategic value for conservation efforts. Use specific examples as needed and consider whether a species could fall into all three categories.
+In our discussion of the strategic value of species diversity earlier this semester, we discussed the concept of indicator species. Briefly outline what an indicator species is and how it differs from a flagship and an umbrella species (which are both classified as surrogate species), two groups that also carry significant strategic value for conservation efforts. Use specific examples as needed and consider whether a species could fall into all three categories.
 
 :::
 
@@ -61,7 +61,7 @@ Discuss the benefits and drawbacks of using macroinvertebrates/bioindicators com
 
 Macroinvertebrates (or "macros" for short) are animals without a backbone (invertebrates) that are large enough to be seen with the naked eye (hence, macro).
 
-Macroinvertebrates are in large part comprised of aquatic insects (e.g. mayflies, stone flies, caddisflies, midges, beetles) but also include non-insect orders and classes such as snails, works, some freshwater clams and mussels, as well as crayfish.
+Macroinvertebrates are in large part comprised of aquatic insects (e.g. mayflies, stone flies, caddisflies, midges, beetles) but also include some non-insect orders and classes such as snails, works, some freshwater clams and mussels, as well as crayfish.
 
 Most of the macroinvertebrates that we sampled are aquatic insects which have complex life cycles with some development stages being completed in the water while the adults generally live on land.
 
@@ -93,6 +93,6 @@ Work with a lab buddy using the following resources to identify the macroinverte
 * [macroinvertebrates.org](https://www.macroinvertebrates.org/key/) or PocketMacro the accompanying app.
 * [Digital dichotomous key](http://cfb.unh.edu/StreamKey/html/begin.html)
 
-Enter each specimen you identify in the appropriate google spreadsheet. Then sort the identified macros into falcon tubes with Ethanol labeled with sample location and date as well as order and family. 
+Enter each specimen you identify in the appropriate google spreadsheet. Then sort the identified macros into falcon tubes with ethanol labeled with sample location and date as well as order and family. 
 
 You can look up the tolerance level for each family in [this table](http://lakes.chebucto.org/ZOOBENTH/BENTHOS/tolerance.html#family) or using [macroinvertebrates.org](https://www.macroinvertebrates.org/key/). Similarly, you can learn about the different functional feeding groups using these resources.

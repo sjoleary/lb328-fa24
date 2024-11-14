@@ -1,0 +1,198 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Exploring brook trout habitat use in summer months
+
+## Brook trout habitat use
+
+::: {.callout-tip title="Consider this"}
+
+Brook trout are cold-water adapted species. Based on their ecology and biology, describe how you expect them to use headwater streams such as Rand Brook as habitat throughout the summer months. What would you expect occupancy/density to look like?
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+Factors to consider:
+
+* Headwater streams stay cooler during summer months compared to higher order streams.
+* A large part of Rand Brook's reaches are under conservation easement, this means that the riparian forest is largely intact.
+
+:::
+
+Now that we have determine the relative concentrations we should take a closer look at what we can learn about brook trout habitat use in Rand Brook during the summer months.
+
+Let's pull in our processed qPCR data set as well as our sample information and combine the two. We will also convert our concentrations to pico mol so we have to deal with less decimals.
+
+```{r}
+
+# read libraries
+library(readr)
+library(janitor)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(glue)
+library(ggplot2)
+library(patchwork)
+library(knitr)
+
+# read in sample information
+sampleinfo <- read_delim("data/RAND_eDNA-samples.csv", ",") %>%
+  clean_names()
+
+# read in qPCR results
+results <- read_delim("data/RAND_eDNA-concentrations.txt", delim = "\t") %>%
+  left_join(sampleinfo) %>%
+  mutate(rel_conc = rel_conc*1000)
+
+```
+
+We have amplified our samples in triplicate - let's see how similar they are. To do this we can plot them by by date for each filter size.
+
+```{r}
+
+ggplot(results, aes(x = date, y = rel_conc, color = pre_filter)) +
+  geom_point() +
+  geom_hline(yintercept = 0.7, color = "red", linetype = "dashed", size = .5) +
+  facet_grid(filter_size ~ .) +
+  theme_bw()
+
+```
+
+::: {.callout-tip title="Consider this"}
+
+What could we check to make sure that the pattern we are seeing is not just related to there being more eDNA extracted in a certain sample? How can we determine if there is a relationship between amplification and brook trout presence?
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+If we compare the DNA extraction quantification with the eDNA detection we should see no relationship between eDNA concentration and qPCR amplification to have a higher confidence that there is a relationship between the amount of brook trout DNA in the overall eDNA sample that is driving the single.
+
+```{r}
+
+ggplot(results, aes(x = quant, y = rel_conc)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_classic()
+
+```
+
+:::
+
+
+::: {.callout-tip title="Give it a try"}
+
+With your group, discuss whether/how you need to further process your data set, as well as how you would like to visualize it to be able to learn about how brook trout are using Rand Brook during the summer months.
+
+Think about different relationships you would expect to see given your earlier predictions of patterns of occupancy in Rand Brook.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+We want to calculate the mean value for samples that were run more than once.
+
+```{r}
+
+rel_abundance <- results %>%
+  group_by(e_dna_sample, sample_id, date, filter_size, pre_filter) %>%
+  summarize(mean_pg = mean(rel_conc),
+            std = sd(rel_conc),
+            min = min(rel_conc),
+            max = max(rel_conc)) %>%
+  mutate(filter_size = as.character(filter_size))
+
+```
+
+Let's create one plot to look at detection of brook trout over time in Rand Brook for Summer 2024 (June - August).
+
+```{r}
+
+ggplot(rel_abundance, aes(x = date, y = mean_pg, fill = filter_size, shape = pre_filter)) +
+  geom_errorbar(aes(ymin = mean_pg - std, ymax = mean_pg + std), width = 0.2) +
+  geom_point(size = 3) +
+  geom_hline(yintercept = 0.7, color = "darkred", linetype = "dashed") +
+  scale_shape_manual(values = c(21, 22)) +
+  scale_fill_manual(values = c("darkorange", "gold")) +
+  labs(x = "", y = "relative concentration [pg/ul]") +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(override.aes = list(shape = 21)))
+
+```
+
+:::
+
+
+## Comparison with environmental factors
+
+From our previous assessment of the Piscataquog headwater streams you may recall that we regularly measure temperature and dissolved oxygen in Rand Brook and other locations during our field seasons.
+
+::: {.callout-tip title="Give it a try"}
+
+Grab a piece of paper and sketch out what you expect the patterns of temperature and dissolved oxygen to be across the year. Discuss with your group how this could impact brook trout occupancy.
+
+:::
+
+Let's read in our data set with environmental parameters for our headwater streams.
+
+```{r}
+
+env <- read_delim("data/environmental-param.tsv", delim = "\t") %>%
+  clean_names() %>%
+  mutate(date = mdy(date),
+         year = year(date))
+
+```
+
+Let's take a closer look at the temperature measurements for Rand in summer 2024
+
+```{r}
+
+# create 2024 temperature data set
+summer24 <- env %>%
+  filter(stream_name == "Rand Brook") %>%
+  filter(year == 2024)
+
+# plot data set
+ggplot(summer24, aes(x = date, y = temp_c)) +
+  geom_point(shape = 21, size = 3, fill = "darkorange") +
+  labs(x = "summer 2024", y = "temperture [C]") +
+  theme_bw()
+
+```
+
+::: {.callout-tip title="Give it a try"}
+
+Create an equivalent plot for dissolved oxygen.
+
+:::
+
+::: {.callout-note title="Answer" collapse="true"}
+
+```{r}
+
+# plot data set
+ggplot(summer24, aes(x = date, y = do_mg_l)) +
+  geom_point(shape = 21, size = 3, fill = "darkorange") +
+  labs(x = "summer 2024", y = "dissolved oxygen [mg/l]") +
+  theme_bw()
+
+```
+
+:::
+
+::: {.callout-tip title="Consider this"}
+
+Interpret your results and consider how this could impact brook trout habitat availability.
+
+:::
+
+
+
+
+

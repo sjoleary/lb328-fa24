@@ -1,12 +1,12 @@
-# Exploring macroinvertebrate biodiversity of headwater streams
+# Exploring macroinvertebrate biodiversity of Piscataquog headwaters
 
 For each of our units you will create a project folder that will contain an `Rproject` along with data, scripts, and other forms of documentation as we explore that topic, it will function as a digital lab notebook. At the beginning of the semester, you should have created a directory on your Desktop or Documents folder names `lb328` as a home directory^[We will use directory and folder synonymously throughout this lab notebook] for all of our projects this semester. 
 
-Go ahead and create a subfolder called `02_macroinverts`, with folders called `data`, `results`, `scr`, and `reports` to hold various files you will access and create for this unit.
+Go ahead and create a subfolder called `02_macroinverts`, with folders called `data`, `results`, `scr`, and `pubs` to hold various files you will access and create for this unit.
 
-You will be able to download data sets and edit spreadsheets as we gather data from a [shared google folder here]().
+You will be able to download data sets and edit spreadsheets as we gather data from a [shared google folder here](https://drive.google.com/drive/folders/1OTSd-VoWAKWeKsnO0eq96Lvb-UWLw9j7?usp=sharings).
 
-In this second unit, we will visit two of our headwater streams and collect macroinvertebrates, we will then determine which taxonomic groups they belong to (order and family), and use that information to assess and compare the ecosystem health of Rand Brook and Schoolhouse brook.
+In this second unit, we will visit two of our headwater streams and collect macroinvertebrates, we will then determine which taxonomic groups they belong to^[we will identify the orders and families they belong to], and use that information to assess and compare the ecosystem health of Rand Brook and Schoolhouse brook.
 
 The research objectives for this component of our headwater monitoring project is to 
 
@@ -18,7 +18,7 @@ The research objectives for this component of our headwater monitoring project i
 
 After completing this activity you should be able to
 
-* Use a dichotomous key and visual cues to identify aquatic macroinvertebrates to the level of order and family.
+* Use a dichotomous key and morphological characters to identify aquatic macroinvertebrates to the level of order and family.
 * Define what a bioindicator species is and describe the key characteristics for good bioindicators.
 * Outline how macroinvertebrates are used for biomonitoring of ecosystem health.
 * Explain how to calculate two commonly used macroinvertebrate bioindices used to assess stream health and apply them to a data set.

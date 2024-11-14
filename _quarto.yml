@@ -24,8 +24,11 @@ book:
 
         
     - part: C_brook-trout.qmd
-#     chapters: 
-#        - C01.qmd
+      chapters: 
+         - C01_qPCR-evaluation.qmd
+         - C02_brook-trout-occupancy.qmd
+         - C03_thermal-regimes.qmd
+         - C04_predicting-habiat-availability.qmd
 
     - part: D_set-up.qmd
       chapters:

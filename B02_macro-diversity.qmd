@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 
 # Comparison of macroinverbrate biodiversity
 
@@ -13,9 +18,15 @@ options(htmltools.dir.version = FALSE)
 
 Now that we've generated all this data we can use it to address our first research objective.
 
+::: {.callout-note icon=false}
+
+## Research Objective 1:
+
 **Compare species richness and diversity for selected headwater streams across spring, summer, and fall.**
 
-Keep in mind that we have data sets from two locations (Rand Brook and Schoolhouse Brook) for three different sampling seasons from multiple years.
+:::
+
+Keep in mind that we have data sets from two locations (Rand Brook and Schoolhouse Brook) for three different sampling seasons from multiple years. Our sampling windows are based on the NEON protocol for sampling macroinvertebrates as their long-term monitoring stations.
 
 * Summer: July 9th - Aug 6th
 * Fall: October 3rd - 31st
@@ -78,7 +89,7 @@ schb_2410 <- read_delim("data/macros_SCHB_2024-10-23.tsv", delim = "\t") %>%
 
 First, we will want to look at the number of individuals in each taxonomic group and calculate their relative abundances and compare species richness and diversity across the two locations.
 
-Let's start with the data set from our visit to rand brook this semester.
+Let's start with the data set from our visit to Rand Brook this semester.
 
 We can figure out the richness by determining the number of individuals in each of the different orders and family.
 
@@ -86,15 +97,15 @@ We can figure out the richness by determining the number of individuals in each 
 
 kable(
   rand_2410 %>%
-    group_by( order) %>%
+    group_by(order) %>%
     count()
 )
 
 ```
 
-This is helpful but our sample sizes differ among locations so we will want to determine the relative abundance for each location.
+This is helpful information but since our sample sizes differ among locations we will want to determine the relative abundance for each location.
 
-We can do this by dividing the number of individuals in a certain group by the total number of individuals sampled at that location.
+We can do this by adding a column using `mutate()` and then telling `R` to divide the number of individuals in a certain group by the total number of individuals sampled at that location for each row in the data frame.
 
 ```{r}
 
@@ -112,23 +123,27 @@ kable(
 
 Use your new found skills to calculate richness and relative abundances for all our data sets by order and family and briefly describe your results.
 
-Recall, that you will want to start by stating the general trends and patterns first in a way that somebody who does not necessarily have your tables in front of them has a good idea of what is being compared and what the major pattern is. Then point out notable highlights.
+Whenever we are describing results you should start by stating the general trends and patterns. The goal is to lower the cognitive burden for your audience - this means that you are doing the thinking for them and presenting the data so that even if they don't have tables in front of them they have a good idea of what is being compared and what the major pattern is. 
 
-Look at each data set separately to identify patterns and then start making comparisons within and among sites.
+Once you have identified the general trends, you want to point out notable highlights. The trick here is to not get lost in the details.
+
+Finally, look at each data set separately to identify patterns and then start making comparisons within and among sites. 
+
+Here are some questions you can ask yourself to help you think through your results:
 
 * are there dominant species? is there an even distribution? in both locations? only one?
 * are all taxonomic groups in both locations? how much overlap is there? does this differ depending on the taxonomic resolution you are looking at?
-* are there seasonabl patterns? in one location? in both locations?
+* are there seasonal patterns? in one location? in both locations?
 * are there notable differences among locations? e.g. taxonomic group occurs in both locations but is really common in one location and more rare in another.
 
-Your answer should be 5-7 sentences.
+*Your answer should be 5-7 sentences.*
 
 :::
 
 
 ::: {.callout-tip title="Consider this"}
 
-Other than a massive table with all the results, is there a good way to visualize this data set?
+Other than a massive table with all the results, is there a good way to visualize this data set to make patterns more apparent?
 
 :::
 
@@ -156,12 +171,17 @@ macros <- bind_rows(rand_2210,
     count() %>%
     ungroup() %>%
     group_by(sample_bout) %>%
-    mutate(rel_abund = round(n/sum(n)*100, digits = 1)) %>%
-   separate(sample_bout, into = c("site_id", "year", "month"), remove = FALSE)
+    separate(sample_bout, into = c("site_id", "year", "month"), remove = FALSE) %>%
+    mutate(rel_abund = round(n/sum(n)*100, digits = 1),
+           season = case_when(sample_bout %in% c("RAND_2022-10", "RAND_2023-10", "RAND_2024-10",
+                                        "SCHB_2022-11", "SCHB_2024-10") ~ "Fall",
+                     sample_bout %in% c("RAND_2023-5", "SCHB_2023-5") ~ "Spring",
+                     sample_bout %in% c("RAND_2023-7", "RAND_2024-7") ~ "Summer")) %>%
+  unite(sample_bout, season, year, sep = " ")
 
 ```
 
-Now we can create a heatplot for relative abundance by order:
+Now we can create a heatplot for relative abundance by order.
 
 ```{r}
 
@@ -173,10 +193,49 @@ ggplot(macros, aes(x = sample_bout, y = order, fill = rel_abund)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
         legend.position = "bottom")
 
+```
+
+Now you can make the same figure by family.
+
+```{r}
+#| fig.height: 10
+#| fig.width: 4
+
+macros <- bind_rows(rand_2210,
+                    rand_2305,
+                    rand_2307,
+                    rand_2310,
+                    rand_2407,
+                    rand_2410,
+                    schb_2210,
+                    schb_2305,
+                    schb_2410) %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date),
+         sample_bout = glue("{site_id}_{year}-{month}")) %>%
+  group_by(sample_bout, family) %>%
+    count() %>%
+    ungroup() %>%
+    group_by(sample_bout) %>%
+    separate(sample_bout, into = c("site_id", "year", "month"), remove = FALSE) %>%
+    mutate(rel_abund = round(n/sum(n)*100, digits = 1),
+           season = case_when(sample_bout %in% c("RAND_2022-10", "RAND_2023-10", "RAND_2024-10",
+                                        "SCHB_2022-11", "SCHB_2024-10") ~ "Fall",
+                     sample_bout %in% c("RAND_2023-5", "SCHB_2023-5") ~ "Spring",
+                     sample_bout %in% c("RAND_2023-7", "RAND_2024-7") ~ "Summer")) %>%
+  unite(sample_bout, season, year, sep = " ")
+
+ggplot(macros, aes(x = sample_bout, y = family, fill = rel_abund)) +
+  geom_tile() +
+  scale_fill_viridis_c(option = "E", direction = -1) +
+  facet_grid(. ~ site_id, scales = "free", space = "free") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "bottom")
+  
 
 ```
 
-Now  you can make the same figure by family.
 
 :::
 
